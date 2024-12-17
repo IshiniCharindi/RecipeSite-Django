@@ -1,0 +1,9 @@
+.recipeTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tableContent{
+    margin: 50px;
+}
