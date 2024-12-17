@@ -1,9 +1,18 @@
 .ManagementContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
     height: 90vh;
     padding: 1rem;
     background-color: #EBEBEB;
 }
-
+.welcomeMsg{
+    margin-left: 15px;
+    font-family: "Font Awesome 6 Pro", "Font Awesome 6 Free";
+    font-weight: bolder;
+}
+.welcomePara{
+    margin-left: 15px;
+    font-family: Serif;
+    font-weight: lighter;
+}

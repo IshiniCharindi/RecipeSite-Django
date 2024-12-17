@@ -4,7 +4,14 @@
     align-items: center;
     justify-content: center;
     height: 25vh;
+}
+.card-title{
+    font-family: "Font Awesome 6 Pro", "Font Awesome 6 Free";
+}
 
-
-
+.btn-cd{
+    background-color:#385a64 !important;
+}
+.btn p{
+    color: white;
 }

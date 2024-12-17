@@ -7,10 +7,10 @@ const ManagementBox = ({title,link}) => {
             <div className="card">
                 <div className="card-body">
                     <div>
-                        <h5 className="card-title">{title}</h5>
+                        <h3 className="card-title">{title}</h3>
                     </div>
                     <div>
-                        <a href={link}><button type="button" className="btn btn-primary">View</button></a>
+                        <a href={link}><button type="button" className="btn btn-cd">View</button></a>
                     </div>
 
                 </div>
