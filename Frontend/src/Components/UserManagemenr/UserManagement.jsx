@@ -52,6 +52,7 @@ const UserManagement = () => {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Actions</th>
+                        <p>hello</p>
                     </tr>
                     </thead>
                     <tbody>
@@ -94,11 +95,11 @@ const UserManagement = () => {
                 </table>
             </div>
 
-            {/* Delete Modal */}
+
             {showDeleteModal && (
                 <DeleteModal
                     onClose={() => setShowDeleteModal(false)}
-                    onConfirm={handleDeleteConfirm} 
+                    onConfirm={handleDeleteConfirm}
                 />
             )}
         </div>
