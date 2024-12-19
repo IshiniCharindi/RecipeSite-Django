@@ -89,7 +89,11 @@ DATABASES = {
     }
 }
 
-CORS_ALLOW_ALL_ORIGINS = True  # Allow all origins
+# CORS_ALLOW_ALL_ORIGINS = True  # Allow all origins
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Allow the React app to make requests
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
