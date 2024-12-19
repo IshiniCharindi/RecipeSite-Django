@@ -6,6 +6,7 @@ import './AdminPanel.css';
 import intro from '../../assets/adminPanelIntro.jpg';
 import icon1 from '../../assets/icon1.png';
 import icon2 from '../../assets/icon2.png';
+import Footer from "../Footer/Footer.jsx";
 
 const AdminPanel = () => {
     const [totalUsers, setTotalUsers] = useState(0);
@@ -90,6 +91,7 @@ const AdminPanel = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     );
 };

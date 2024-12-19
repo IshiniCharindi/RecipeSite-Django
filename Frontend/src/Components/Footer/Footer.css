@@ -1,0 +1,15 @@
+footer {
+    background-color: #8F4738 !important;
+}
+
+footer h6, footer p {
+    color: white !important;
+}
+
+footer .text-reset {
+    color: white !important; /* Ensures that links also appear white */
+}
+
+footer .fab {
+    color: white !important; /* Ensures that icons also appear white */
+}
