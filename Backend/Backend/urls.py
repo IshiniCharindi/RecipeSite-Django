@@ -4,11 +4,12 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from userManagement.views import UserManagementView
+from userManagement.views import UserManagementView,RecipieManagementView
 from rest_framework import routers
 
 route = routers.DefaultRouter()
-route.register("",UserManagementView,basename="userManagement")
+route.register("users",UserManagementView,basename="userManagement")
+route.register("recipies",RecipieManagementView,basename="recipieManagement")
 
 urlpatterns = [
     path('admin/', admin.site.urls),

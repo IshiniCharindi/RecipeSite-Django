@@ -14,7 +14,7 @@ const UserManagement = () => {
     // Fetch all users
     const getUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/');
+            const response = await axios.get('http://localhost:8000/api/users');
             setUsers(response.data);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -30,7 +30,7 @@ const UserManagement = () => {
     // Handle Confirm Delete
     const handleDeleteConfirm = async () => {
         try {
-            await axios.delete(`http://localhost:8000/api/${selectedUser.id}/`);
+            await axios.delete(`http://localhost:8000/api/users/${selectedUser.id}/`);
             setUsers(users.filter(u => u.id !== selectedUser.id));
             setShowDeleteModal(false);
         } catch (error) {
@@ -47,7 +47,7 @@ const UserManagement = () => {
     // Handle User Update
     const handleUpdateUser = async (updatedUser) => {
         try {
-            const response = await axios.put(`http://localhost:8000/api/${updatedUser.id}/`, updatedUser);
+            const response = await axios.put(`http://localhost:8000/api/users/${updatedUser.id}/`, updatedUser);
             setUsers(users.map(u => (u.id === updatedUser.id ? response.data : u)));
             setShowEditModal(false);
         } catch (error) {
