@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const RecipieManagement = () => {
     const [recipes, setRecipes] = useState([]);
+    const [selectedRecipe, setSelectedRecipe] = useState(null); // For detailed view
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/recipies/')
@@ -17,13 +18,13 @@ const RecipieManagement = () => {
             .then(response => {
                 alert(response.data.message);
                 setRecipes(prev => prev.map(recipe => recipe.id === recipeId ? { ...recipe, status } : recipe));
+                setSelectedRecipe(null); // Close modal after updating
             })
             .catch(error => console.error('Error updating status:', error));
     };
 
-    // Filter recipes by status
     const pendingRecipes = recipes.filter(recipe => recipe.status === 'P');
-    const processedRecipes = recipes.filter(recipe => recipe.status === 'A' || recipe.status === 'R');
+    const processedRecipes = recipes.filter(recipe => recipe.status !== 'P'); // Approved or Rejected
 
     return (
         <>
@@ -32,7 +33,7 @@ const RecipieManagement = () => {
                 <h1>Recipie Management</h1>
             </div>
 
-            {/* Table for Pending Recipes */}
+            {/* Pending Recipes Table */}
             <div className="tableContent">
                 <h2>Pending Recipes</h2>
                 {pendingRecipes.length > 0 ? (
@@ -72,16 +73,9 @@ const RecipieManagement = () => {
                                     <button
                                         type="button"
                                         className="btn btn-link btn-sm btn-rounded"
-                                        onClick={() => updateStatus(recipe.id, 'A')}
+                                        onClick={() => setSelectedRecipe(recipe)}
                                     >
-                                        Approve
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="btn btn-link btn-sm btn-rounded"
-                                        onClick={() => updateStatus(recipe.id, 'R')}
-                                    >
-                                        Reject
+                                        View
                                     </button>
                                 </td>
                             </tr>
@@ -93,65 +87,124 @@ const RecipieManagement = () => {
                 )}
             </div>
 
-            {/* Table for Processed Recipes */}
+            {/* Processed Recipes Table */}
             <div className="tableContent">
                 <h2>Processed Recipes</h2>
-                <table className="table align-middle mb-0 bg-white">
-                    <thead className="bg-light">
-                    <tr>
-                        <th>Username</th>
-                        <th>Recipie Title</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {processedRecipes.map(recipe => (
-                        <tr key={recipe.id}>
-                            <td>
-                                <div className="d-flex align-items-center">
-                                    <img
-                                        src={recipe.image1}
-                                        alt=""
-                                        style={{ width: '45px', height: '45px' }}
-                                        className="rounded-circle"
-                                    />
-                                    <div className="ms-3">
-                                        <p className="fw-bold mb-1">{recipe.title}</p>
-                                        <p className="text-muted mb-0">{recipe.description}</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p className="fw-normal mb-1">{recipe.title}</p>
-                            </td>
-                            <td>
-                                    <span className={`badge rounded-pill d-inline 
-                                        ${recipe.status === 'A' ? 'badge-success' : 'badge-danger'}`}>
-                                        {recipe.status === 'A' ? 'Approved' : 'Rejected'}
-                                    </span>
-                            </td>
-                            <td>
-                                <button
-                                    type="button"
-                                    className="btn btn-link btn-sm btn-rounded"
-                                    onClick={() => updateStatus(recipe.id, 'P')}
-                                >
-                                    Mark as Pending
-                                </button>
-                                <button
-                                    type="button"
-                                    className="btn btn-link btn-sm btn-rounded"
-                                    onClick={() => updateStatus(recipe.id, recipe.status === 'A' ? 'R' : 'A')}
-                                >
-                                    {recipe.status === 'A' ? 'Reject' : 'Approve'}
-                                </button>
-                            </td>
+                {processedRecipes.length > 0 ? (
+                    <table className="table align-middle mb-0 bg-white">
+                        <thead className="bg-light">
+                        <tr>
+                            <th>Username</th>
+                            <th>Recipie Title</th>
+                            <th>Status</th>
+                            <th>Actions</th>
                         </tr>
-                    ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {processedRecipes.map(recipe => (
+                            <tr key={recipe.id}>
+                                <td>
+                                    <div className="d-flex align-items-center">
+                                        <img
+                                            src={recipe.image1}
+                                            alt=""
+                                            style={{ width: '45px', height: '45px' }}
+                                            className="rounded-circle"
+                                        />
+                                        <div className="ms-3">
+                                            <p className="fw-bold mb-1">{recipe.title}</p>
+                                            <p className="text-muted mb-0">{recipe.description}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p className="fw-normal mb-1">{recipe.title}</p>
+                                </td>
+                                <td>
+                                        <span
+                                            className={`badge rounded-pill d-inline ${
+                                                recipe.status === 'A' ? 'badge-success' : 'badge-danger'
+                                            }`}
+                                        >
+                                            {recipe.status === 'A' ? 'Approved' : 'Rejected'}
+                                        </span>
+                                </td>
+                                <td>
+                                    <button
+                                        type="button"
+                                        className="btn btn-link btn-sm btn-rounded"
+                                        onClick={() => setSelectedRecipe(recipe)}
+                                    >
+                                        View
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-link btn-sm btn-rounded"
+                                        onClick={() =>
+                                            updateStatus(recipe.id, recipe.status === 'A' ? 'R' : 'A')
+                                        }
+                                    >
+                                        {recipe.status === 'A' ? 'Reject' : 'Approve'}
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <p>No processed recipes found.</p>
+                )}
             </div>
+
+            {/* Detailed View Modal */}
+            {selectedRecipe && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>{selectedRecipe.title}</h2>
+                        <div className="image-container">
+                            <img
+                                src={selectedRecipe.image1}
+                                alt="Recipe"
+                                style={{ width: '40%', height: 'auto', marginBottom: '20px' }}
+                            />
+                            <img
+                                src={selectedRecipe.image2}
+                                alt="Recipe"
+                                style={{ width: '40%', height: 'auto', marginBottom: '20px' }}
+                            />
+                        </div>
+
+                        <p><strong>Description:</strong> {selectedRecipe.description}</p>
+                        <p><strong>Ingredients:</strong> {selectedRecipe.ingredients}</p>
+                        <p><strong>Instructions:</strong> {selectedRecipe.instructions}</p>
+
+                        <div className="modal-actions">
+                            {selectedRecipe.status === 'P' && (
+                                <>
+                                    <button
+                                        className="btn btn-success"
+                                        onClick={() => updateStatus(selectedRecipe.id, 'A')}
+                                    >
+                                        Approve
+                                    </button>
+                                    <button
+                                        className="btn btn-danger"
+                                        onClick={() => updateStatus(selectedRecipe.id, 'R')}
+                                    >
+                                        Reject
+                                    </button>
+                                </>
+                            )}
+                            <button
+                                className="btn btn-secondary"
+                                onClick={() => setSelectedRecipe(null)}
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 };
