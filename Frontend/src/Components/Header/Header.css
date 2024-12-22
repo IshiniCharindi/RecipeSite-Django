@@ -1,0 +1,12 @@
+.navigationBar {
+    background-color:  #8F4738 !important;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #fff;
+}
+img{
+    height: 50px;
+}
