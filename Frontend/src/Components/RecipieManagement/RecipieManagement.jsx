@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from "../Header/Header.jsx";
 import './RecipieManagement.css';
 import axios from 'axios';
@@ -13,20 +13,89 @@ const RecipieManagement = () => {
     }, []);
 
     const updateStatus = (recipeId, status) => {
-        axios.post(`http://127.0.0.1:8000/api/recipies/${recipeId}/update_status/`, {status})
+        axios.post(`http://127.0.0.1:8000/api/recipies/${recipeId}/update_status/`, { status })
             .then(response => {
                 alert(response.data.message);
-                setRecipes(prev => prev.map(recipe => recipe.id === recipeId ? {...recipe, status} : recipe));
+                setRecipes(prev => prev.map(recipe => recipe.id === recipeId ? { ...recipe, status } : recipe));
             })
             .catch(error => console.error('Error updating status:', error));
     };
 
-    return (<>
-            <Header/>
+    // Filter recipes by status
+    const pendingRecipes = recipes.filter(recipe => recipe.status === 'P');
+    const processedRecipes = recipes.filter(recipe => recipe.status === 'A' || recipe.status === 'R');
+
+    return (
+        <>
+            <Header />
             <div className="recipeTitle">
                 <h1>Recipie Management</h1>
             </div>
+
+            {/* Table for Pending Recipes */}
             <div className="tableContent">
+                <h2>Pending Recipes</h2>
+                {pendingRecipes.length > 0 ? (
+                    <table className="table align-middle mb-0 bg-white">
+                        <thead className="bg-light">
+                        <tr>
+                            <th>Username</th>
+                            <th>Recipie Title</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {pendingRecipes.map(recipe => (
+                            <tr key={recipe.id}>
+                                <td>
+                                    <div className="d-flex align-items-center">
+                                        <img
+                                            src={recipe.image1}
+                                            alt=""
+                                            style={{ width: '45px', height: '45px' }}
+                                            className="rounded-circle"
+                                        />
+                                        <div className="ms-3">
+                                            <p className="fw-bold mb-1">{recipe.title}</p>
+                                            <p className="text-muted mb-0">{recipe.description}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p className="fw-normal mb-1">{recipe.title}</p>
+                                </td>
+                                <td>
+                                    <span className="badge rounded-pill d-inline badge-warning">Pending</span>
+                                </td>
+                                <td>
+                                    <button
+                                        type="button"
+                                        className="btn btn-link btn-sm btn-rounded"
+                                        onClick={() => updateStatus(recipe.id, 'A')}
+                                    >
+                                        Approve
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-link btn-sm btn-rounded"
+                                        onClick={() => updateStatus(recipe.id, 'R')}
+                                    >
+                                        Reject
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <p>No new recipes to review.</p>
+                )}
+            </div>
+
+            {/* Table for Processed Recipes */}
+            <div className="tableContent">
+                <h2>Processed Recipes</h2>
                 <table className="table align-middle mb-0 bg-white">
                     <thead className="bg-light">
                     <tr>
@@ -37,13 +106,14 @@ const RecipieManagement = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {recipes.map(recipe => (<tr key={recipe.id}>
+                    {processedRecipes.map(recipe => (
+                        <tr key={recipe.id}>
                             <td>
                                 <div className="d-flex align-items-center">
                                     <img
                                         src={recipe.image1}
                                         alt=""
-                                        style={{width: '45px', height: '45px'}}
+                                        style={{ width: '45px', height: '45px' }}
                                         className="rounded-circle"
                                     />
                                     <div className="ms-3">
@@ -56,32 +126,34 @@ const RecipieManagement = () => {
                                 <p className="fw-normal mb-1">{recipe.title}</p>
                             </td>
                             <td>
-                                   <span className={`badge rounded-pill d-inline 
-                                            ${recipe.status === 'A' ? 'badge-success' : recipe.status === 'P' ? 'badge-warning' : 'badge-danger'}`}>
-                                            {recipe.status === 'A' ? 'Approved' : recipe.status === 'P' ? 'Pending' : 'Rejected'}
+                                    <span className={`badge rounded-pill d-inline 
+                                        ${recipe.status === 'A' ? 'badge-success' : 'badge-danger'}`}>
+                                        {recipe.status === 'A' ? 'Approved' : 'Rejected'}
                                     </span>
                             </td>
                             <td>
                                 <button
                                     type="button"
                                     className="btn btn-link btn-sm btn-rounded"
-                                    onClick={() => updateStatus(recipe.id, 'A')}
+                                    onClick={() => updateStatus(recipe.id, 'P')}
                                 >
-                                    Approve
+                                    Mark as Pending
                                 </button>
                                 <button
                                     type="button"
                                     className="btn btn-link btn-sm btn-rounded"
-                                    onClick={() => updateStatus(recipe.id, 'R')}
+                                    onClick={() => updateStatus(recipe.id, recipe.status === 'A' ? 'R' : 'A')}
                                 >
-                                    Reject
+                                    {recipe.status === 'A' ? 'Reject' : 'Approve'}
                                 </button>
                             </td>
-                        </tr>))}
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>
-        </>);
+        </>
+    );
 };
 
 export default RecipieManagement;
