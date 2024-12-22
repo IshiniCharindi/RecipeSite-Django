@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Header from "../Header/Header.jsx";
 import './RecipieManagement.css';
 import axios from 'axios';
@@ -13,21 +13,16 @@ const RecipieManagement = () => {
     }, []);
 
     const updateStatus = (recipeId, status) => {
-        axios.post(`http://127.0.0.1:8000/api/recipies/${recipeId}/update_status/`, { status })
+        axios.post(`http://127.0.0.1:8000/api/recipies/${recipeId}/update_status/`, {status})
             .then(response => {
                 alert(response.data.message);
-                setRecipes(prev =>
-                    prev.map(recipe =>
-                        recipe.id === recipeId ? { ...recipe, status } : recipe
-                    )
-                );
+                setRecipes(prev => prev.map(recipe => recipe.id === recipeId ? {...recipe, status} : recipe));
             })
             .catch(error => console.error('Error updating status:', error));
     };
 
-    return (
-        <>
-            <Header />
+    return (<>
+            <Header/>
             <div className="recipeTitle">
                 <h1>Recipie Management</h1>
             </div>
@@ -42,14 +37,13 @@ const RecipieManagement = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {recipes.map(recipe => (
-                        <tr key={recipe.id}>
+                    {recipes.map(recipe => (<tr key={recipe.id}>
                             <td>
                                 <div className="d-flex align-items-center">
                                     <img
                                         src={recipe.image1}
                                         alt=""
-                                        style={{ width: '45px', height: '45px' }}
+                                        style={{width: '45px', height: '45px'}}
                                         className="rounded-circle"
                                     />
                                     <div className="ms-3">
@@ -62,8 +56,9 @@ const RecipieManagement = () => {
                                 <p className="fw-normal mb-1">{recipe.title}</p>
                             </td>
                             <td>
-                                    <span className={`badge rounded-pill d-inline ${recipe.status === 'A' ? 'badge-success' : 'badge-warning'}`}>
-                                        {recipe.status === 'A' ? 'Approved' : recipe.status === 'P' ? 'Pending' : 'Rejected'}
+                                   <span className={`badge rounded-pill d-inline 
+                                            ${recipe.status === 'A' ? 'badge-success' : recipe.status === 'P' ? 'badge-warning' : 'badge-danger'}`}>
+                                            {recipe.status === 'A' ? 'Approved' : recipe.status === 'P' ? 'Pending' : 'Rejected'}
                                     </span>
                             </td>
                             <td>
@@ -82,13 +77,11 @@ const RecipieManagement = () => {
                                     Reject
                                 </button>
                             </td>
-                        </tr>
-                    ))}
+                        </tr>))}
                     </tbody>
                 </table>
             </div>
-        </>
-    );
+        </>);
 };
 
 export default RecipieManagement;

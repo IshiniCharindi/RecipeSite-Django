@@ -18,7 +18,7 @@ class UserManagementView(viewsets.ModelViewSet):
         return Response({"total users":totalUsers})
 
 class RecipieManagementView(viewsets.ModelViewSet):
-    queryset = RecipieManagement.objects.filter(status='P')
+    queryset = RecipieManagement.objects.all()
     serializer_class = RecipieManagementSerializer
 
     @action(detail=False , methods=['GET'])
