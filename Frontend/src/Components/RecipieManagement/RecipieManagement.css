@@ -4,6 +4,19 @@
     justify-content: center;
 }
 
-.tableContent{
-    margin: 50px;
+.tableContent {
+    margin: 20px auto;
+    width: 90%;
+}
+.recipeTitle {
+    text-align: center;
+    margin-top: 20px;
+}
+.badge-success {
+    background-color: #28a745;
+    color: white;
+}
+.badge-warning {
+    background-color: #ffc107;
+    color: white;
 }
