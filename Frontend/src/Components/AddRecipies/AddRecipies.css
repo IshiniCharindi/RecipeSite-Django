@@ -5,4 +5,32 @@
 .addRecipieContainer{
     background-color: #ffffff;
     margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.addRecipieContainer h1{
+    text-align: center;
+    color: black;
+}
+
+.buttonContainer button {
+    font-size: 18px !important;
+    color: black;
+}
+
+.addRecipieContainer label{
+     color: black;
+     font-size: large;
+ }
+input[type=text]{
+    border: 2px solid  #8F4738;
+    border-radius: 8px;
+}
+input[type=file]{
+    border:  2px solid  #8F4738;
+    border-radius: 15px;
+}
+textarea{
+    border:  2px solid  #8F4738 !important;
+    border-radius: 8px;
 }
