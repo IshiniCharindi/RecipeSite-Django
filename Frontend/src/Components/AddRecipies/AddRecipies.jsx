@@ -6,50 +6,48 @@ import Footer from "../Footer/Footer.jsx";
 
 const AddRecipies = () => {
     const [formData, setFormData] = useState({
-        title: '',
-        ingredients: '',
-        steps: '',
-        description: '',
+        title: "",
+        ingredients: "",
+        steps: "",
+        description: "",
         image1: null,
         image2: null,
     });
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        if (files) {
-            setFormData({ ...formData, [name]: files[0] });
+        const { name, value, type, files } = e.target;
+        if (type === "file") {
+            setFormData((prev) => ({
+                ...prev,
+                [name]: files[0],
+            }));
         } else {
-            setFormData({ ...formData, [name]: value });
+            setFormData((prev) => ({
+                ...prev,
+                [name]: value,
+            }));
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const data = new FormData();
-        data.append('title', formData.title);
-        data.append('ingredients', formData.ingredients);
-        data.append('steps', formData.steps);
-        data.append('description', formData.description);
-        if (formData.image1) data.append('image1', formData.image1);
-        if (formData.image2) data.append('image2', formData.image2);
+        const formDataToSend = new FormData();
+        for (const key in formData) {
+            formDataToSend.append(key, formData[key]);
+        }
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/recipies/', data, {
+            const response = await axios.post("http://127.0.0.1:8000/api/recipies/", formDataToSend, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    "Content-Type": "multipart/form-data",
                 },
             });
-            alert('Recipe added successfully!');
-            console.log(response.data);
+            alert("Recipe added successfully!");
         } catch (error) {
-            console.error(error);
-            console.log(data);
-
-            alert('Failed to add the recipe. Please try again.');
+            console.error("Error adding recipe:", error);
+            alert("Failed to add recipe. Please try again.");
         }
     };
-
     return (
         <div className="mainContainer">
             <Header />
@@ -109,7 +107,7 @@ const AddRecipies = () => {
                             </svg> &nbsp;
                             Image 1</label>
                         <div className="col-sm-4">
-                            <input className="form-control" type="file" id="formFile" value={formData.image1} onChange={handleChange}/>
+                            <input className="form-control" type="file" id="formFile" name="image1"  onChange={handleChange}/>
                         </div>
                         <label htmlFor="inputPassword" className="col-sm-2 col-form-label">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-image" viewBox="0 0 16 16">
@@ -118,7 +116,7 @@ const AddRecipies = () => {
                             </svg> &nbsp;
                             Image 2</label>
                         <div className="col-sm-4">
-                            <input className="form-control" type="file" id="formFile" value={formData.image2} onChange={handleChange}/>
+                            <input className="form-control" type="file" id="formFile" name="image2"  onChange={handleChange}/>
                         </div>
                     </div>
                     {/*value={formData.description} onChange={handleChange}*/}
