@@ -1,3 +1,7 @@
+.ManagementContainer{
+    background-color: #F9F3EF;
+    margin-top: -1rem;
+}
 .ManagementTopContainer {
     display: flex;
     flex-wrap: wrap;

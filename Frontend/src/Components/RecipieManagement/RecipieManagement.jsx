@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer.jsx";
 
 const RecipieManagement = () => {
     const [recipes, setRecipes] = useState([]);
-    const [selectedRecipe, setSelectedRecipe] = useState(null); // For detailed view
+    const [selectedRecipe, setSelectedRecipe] = useState(null);
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/recipies/')
@@ -19,13 +19,13 @@ const RecipieManagement = () => {
             .then(response => {
                 alert(response.data.message);
                 setRecipes(prev => prev.map(recipe => recipe.id === recipeId ? { ...recipe, status } : recipe));
-                setSelectedRecipe(null); // Close modal after updating
+                setSelectedRecipe(null);
             })
             .catch(error => console.error('Error updating status:', error));
     };
 
     const pendingRecipes = recipes.filter(recipe => recipe.status === 'P');
-    const processedRecipes = recipes.filter(recipe => recipe.status !== 'P'); // Approved or Rejected
+    const processedRecipes = recipes.filter(recipe => recipe.status !== 'P');
 
     return (
         <>
@@ -38,8 +38,8 @@ const RecipieManagement = () => {
             <div className="tableContent">
                 <h2>Pending Recipes</h2>
                 {pendingRecipes.length > 0 ? (
-                    <table className="table align-middle mb-0 bg-white">
-                        <thead className="bg-light">
+                    <table className="table align-middle">
+                        <thead>
                         <tr>
                             <th>Username</th>
                             <th>Recipie Title</th>
@@ -55,25 +55,21 @@ const RecipieManagement = () => {
                                         <img
                                             src={recipe.image1}
                                             alt=""
-                                            style={{ width: '45px', height: '45px' }}
-                                            className="rounded-circle"
+                                            className="recipe-image"
                                         />
                                         <div className="ms-3">
-                                            <p className="fw-bold mb-1">{recipe.title}</p>
-                                            <p className="text-muted mb-0">{recipe.description}</p>
+                                            <p className="fw-bold">{recipe.title}</p>
+                                            <p className="text-muted">{recipe.description}</p>
                                         </div>
                                     </div>
                                 </td>
+                                <td>{recipe.title}</td>
                                 <td>
-                                    <p className="fw-normal mb-1">{recipe.title}</p>
-                                </td>
-                                <td>
-                                    <span className="badge rounded-pill d-inline badge-warning">Pending</span>
+                                    <span className="badge badge-warning">Pending</span>
                                 </td>
                                 <td>
                                     <button
-                                        type="button"
-                                        className="btn btn-link btn-sm btn-rounded"
+                                        className="btn-view"
                                         onClick={() => setSelectedRecipe(recipe)}
                                     >
                                         View
@@ -84,7 +80,7 @@ const RecipieManagement = () => {
                         </tbody>
                     </table>
                 ) : (
-                    <p>No new recipes to review.</p>
+                    <p className="no-data">No new recipes to review.</p>
                 )}
             </div>
 
@@ -92,8 +88,8 @@ const RecipieManagement = () => {
             <div className="tableContent">
                 <h2>Processed Recipes</h2>
                 {processedRecipes.length > 0 ? (
-                    <table className="table align-middle mb-0 bg-white">
-                        <thead className="bg-light">
+                    <table className="table align-middle">
+                        <thead>
                         <tr>
                             <th>Username</th>
                             <th>Recipie Title</th>
@@ -109,21 +105,18 @@ const RecipieManagement = () => {
                                         <img
                                             src={recipe.image1}
                                             alt=""
-                                            style={{ width: '45px', height: '45px' }}
-                                            className="rounded-circle"
+                                            className="recipe-image"
                                         />
                                         <div className="ms-3">
-                                            <p className="fw-bold mb-1">{recipe.title}</p>
-                                            <p className="text-muted mb-0">{recipe.description}</p>
+                                            <p className="fw-bold">{recipe.title}</p>
+                                            <p className="text-muted">{recipe.description}</p>
                                         </div>
                                     </div>
                                 </td>
-                                <td>
-                                    <p className="fw-normal mb-1">{recipe.title}</p>
-                                </td>
+                                <td>{recipe.title}</td>
                                 <td>
                                         <span
-                                            className={`badge rounded-pill d-inline ${
+                                            className={`badge ${
                                                 recipe.status === 'A' ? 'badge-success' : 'badge-danger'
                                             }`}
                                         >
@@ -132,15 +125,13 @@ const RecipieManagement = () => {
                                 </td>
                                 <td>
                                     <button
-                                        type="button"
-                                        className="btn btn-link btn-sm btn-rounded"
+                                        className="btn-view"
                                         onClick={() => setSelectedRecipe(recipe)}
                                     >
                                         View
-                                    </button>
+                                    </button> &nbsp;
                                     <button
-                                        type="button"
-                                        className="btn btn-link btn-sm btn-rounded"
+                                        className="btn-toggle"
                                         onClick={() =>
                                             updateStatus(recipe.id, recipe.status === 'A' ? 'R' : 'A')
                                         }
@@ -153,43 +144,34 @@ const RecipieManagement = () => {
                         </tbody>
                     </table>
                 ) : (
-                    <p>No processed recipes found.</p>
+                    <p className="no-data">No processed recipes found.</p>
                 )}
             </div>
-            <Footer/>
+            <Footer />
+
             {/* Detailed View Modal */}
             {selectedRecipe && (
                 <div className="modal">
                     <div className="modal-content">
                         <h2>{selectedRecipe.title}</h2>
                         <div className="image-container">
-                            <img
-                                src={selectedRecipe.image1}
-                                alt="Recipe"
-                                style={{ width: '40%', height: 'auto', marginBottom: '20px' }}
-                            />
-                            <img
-                                src={selectedRecipe.image2}
-                                alt="Recipe"
-                                style={{ width: '40%', height: 'auto', marginBottom: '20px' }}
-                            />
+                            <img src={selectedRecipe.image1} alt="Recipe" className="modal-image" />
+                            <img src={selectedRecipe.image2} alt="Recipe" className="modal-image" />
                         </div>
-
                         <p><strong>Description:</strong> {selectedRecipe.description}</p>
                         <p><strong>Ingredients:</strong> {selectedRecipe.ingredients}</p>
                         <p><strong>Instructions:</strong> {selectedRecipe.instructions}</p>
-
                         <div className="modal-actions">
                             {selectedRecipe.status === 'P' && (
                                 <>
                                     <button
-                                        className="btn btn-success"
+                                        className="btn-approve"
                                         onClick={() => updateStatus(selectedRecipe.id, 'A')}
                                     >
                                         Approve
                                     </button>
                                     <button
-                                        className="btn btn-danger"
+                                        className="btn-reject"
                                         onClick={() => updateStatus(selectedRecipe.id, 'R')}
                                     >
                                         Reject
@@ -197,7 +179,7 @@ const RecipieManagement = () => {
                                 </>
                             )}
                             <button
-                                className="btn btn-secondary"
+                                className="btn-close"
                                 onClick={() => setSelectedRecipe(null)}
                             >
                                 Close
@@ -206,7 +188,6 @@ const RecipieManagement = () => {
                     </div>
                 </div>
             )}
-
         </>
     );
 };

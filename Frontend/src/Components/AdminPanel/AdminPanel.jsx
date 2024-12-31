@@ -42,7 +42,7 @@ const AdminPanel = () => {
             <Header/>
             <div className="ManagementContainer">
                 <div className="ManagementTopContainer">
-                    <div className="container mt-2">
+                    <div className="container mt-4">
                         <div className="row">
                             <div className="col-lg-9 col-md-9 col-sm-12 ">
                                 <div className="card mb-3" style={{'height': '52vh'}}>

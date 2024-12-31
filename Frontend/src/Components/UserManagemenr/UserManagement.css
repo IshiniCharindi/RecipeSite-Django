@@ -1,5 +1,22 @@
 .userTitle{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+        text-align: center;
+        margin-top: 20px;
+        color: #8F4738;
+
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    background-color:#967969;
+    color: white;
+}
+
+.table th, .table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
