@@ -1,18 +1,128 @@
-.ManagementContainer {
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
-    height: 90vh;
-    padding: 1rem;
-    background-color: #EBEBEB;
+.ManagementTopContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0;
 }
-.welcomeMsg{
-    margin-left: 15px;
-    font-family: "Font Awesome 6 Pro", "Font Awesome 6 Free";
-    font-weight: bolder;
+
+.ManagementTopContainer .card {
+    flex: 1;
+    max-width: 100%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
-.welcomePara{
-    margin-left: 15px;
-    font-family: Serif;
-    font-weight: lighter;
+
+
+.ManagementTopContainer .welcomeMsg {
+    margin-top: 10rem;
+    font-size: 3rem;
+    text-align: center;
+}
+.ManagementTopContainer .welcomePara {
+    margin-top: 1rem;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.ManagementTopContainer .card-img-top {
+    width: auto;
+    /*object-fit: cover;*/
+    height: auto;
+}
+
+.ManagementTopContainer img {
+    width: auto;
+    height: auto;
+}
+.smallDevice{
+    display: none;
+}
+/* For screens smaller than 768px */
+@media screen and (max-width: 1100px) {
+    .ManagementTopContainer .welcomeMsg {
+        margin-top: 10rem;
+        font-size: 2rem;
+
+    }
+    .ManagementTopContainer .welcomePara {
+        margin-top: 1rem;
+        font-size: 0.8rem;
+
+    }
+    .totalContainer .card-title{
+        font-size: 2rem;
+    }
+    .totalContainer .card-text{
+        font-size: 1rem;
+    }
+    .smallDevice{
+        display: none;
+    }
+}
+@media screen and (max-width: 768px) {
+    .smallDevice{
+        display: none;
+    }
+    .ManagementTopContainer {
+        flex-direction: column;
+    }
+
+    .ManagementTopContainer .card {
+        max-width: 100%;
+    }
+
+    .welcomeMsg {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .card-text.welcomePara {
+        font-size: 0.7rem;
+        text-align: center;
+    }
+
+    .totalContainer{
+        display: flex;
+        gap: 1rem;
+    }
+    .totalContainer .card-title{
+        font-size: 3rem;
+    }
+    .totalContainer .card-text{
+        font-size: 1rem;
+    }
+    .controlContainer{
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    .ManagementTopContainer .card {
+        padding: 1rem;
+    }
+
+    .ManagementTopContainer .welcomeMsg {
+        font-size: 1.2rem;
+    }
+
+    .card-text.welcomePara {
+        font-size: 0.8rem;
+    }
+    .largeDevice{
+        display: none !important;
+    }
+    .smallDevice{
+        display: inline-block;
+    }
+    .smallDevice img{
+        height: 25vh!important;
+    }
+    .smallDevice .welcomeMsg{
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
 }

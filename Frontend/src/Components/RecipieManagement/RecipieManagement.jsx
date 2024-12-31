@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from "../Header/Header.jsx";
 import './RecipieManagement.css';
 import axios from 'axios';
+import Footer from "../Footer/Footer.jsx";
 
 const RecipieManagement = () => {
     const [recipes, setRecipes] = useState([]);
@@ -155,7 +156,7 @@ const RecipieManagement = () => {
                     <p>No processed recipes found.</p>
                 )}
             </div>
-
+            <Footer/>
             {/* Detailed View Modal */}
             {selectedRecipe && (
                 <div className="modal">
@@ -205,6 +206,7 @@ const RecipieManagement = () => {
                     </div>
                 </div>
             )}
+
         </>
     );
 };

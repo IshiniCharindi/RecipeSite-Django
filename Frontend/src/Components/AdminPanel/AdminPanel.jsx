@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import ManagementBox from "./ManagementBox/ManagementBox.jsx";
 import Header from "../Header/Header.jsx";
@@ -39,40 +39,67 @@ const AdminPanel = () => {
 
     return (
         <>
-            <Header />
+            <Header/>
             <div className="ManagementContainer">
                 <div className="ManagementTopContainer">
                     <div className="container mt-2">
                         <div className="row">
-                            <div className="col-9">
-                                <div className="card flex-row" style={{ 'height': '51vh' }}>
-                                    <div className="card-body" style={{ 'marginTop': '90px' }}>
-                                        <h1 className="welcomeMsg">Welcome to Admin Dashboard</h1>
-                                        <p className="card-text welcomePara">"Effortlessly manage all your recipes, ingredients, and user interactions with our intuitive dashboard. Simplify your workflow and focus on creating mouth-watering dishes for your audience."</p>
+                            <div className="col-lg-9 col-md-9 col-sm-12 ">
+                                <div className="card mb-3" style={{'height': '52vh'}}>
+                                    <div className="row g-0 largeDevice">
+                                        <div className="col-5 col-lg-5 col-md-5 col-sm-12 ">
+                                            <div className="card-body">
+                                                <h1 className="card-title welcomeMsg">Welcome to Admin Dashboard</h1>
+                                                <p className="card-text welcomePara">"Effortlessly manage all your
+                                                    recipes, ingredients, and user interactions with our intuitive
+                                                    dashboard. Simplify your workflow and focus on creating
+                                                    mouth-watering dishes for your audience."</p>
+                                            </div>
+                                        </div>
+                                        <div className="col-7 col-lg-7 col-md-7 col-sm-12">
+                                            <img src={intro} className="card-img-top img-fluid rounded-start" alt="..."
+                                                 style={{'height': '50vh'}}/>
+                                        </div>
+
                                     </div>
-                                    <img src={intro} className="card-img-top" alt="..." style={{ 'height': '50vh' }} />
+                                    {/*for small device*/}
+                                    <div className="smallDevice">
+                                        <div className="card-body">
+                                            <h1 className="card-title welcomeMsg">Welcome to Admin Dashboard</h1>
+                                            <img src={intro} className="card-img-top img-fluid rounded-start" alt="..."
+                                                 style={{'height': '50vh'}}/>
+                                            <p className="card-text welcomePara">"Effortlessly manage all your
+                                                recipes, ingredients, and user interactions with our intuitive
+                                                dashboard. Simplify your workflow and focus on creating
+                                                mouth-watering dishes for your audience."</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="col-3">
-                                <div className="card">
-                                    <div className="card-body flex-row">
-                                        <div>
-                                            <img src={icon2} alt="" style={{ 'height': '100px', 'width': '100px' }} />
+                            <div className="col-lg-3 col-md-3 col-sm-12 totalContainer">
+                                <div className="card mb-3 col-sm-5" style={{'width':'50vw'}}>
+                                    <div className="row g-0">
+                                        <div className="col-4 col-md-5">
+                                            <img src={icon2} alt="" className="img-fluid rounded-start mt-4 m-3"/>
                                         </div>
-                                        <div>
-                                            <h2>{totalRecipies}</h2>
-                                            <h5 className="card-title">Total Recipies</h5>
+                                        <div className="col-8 col-md-7">
+                                            <div className="card-body">
+                                                <h1 className="card-title">{totalRecipies}</h1>
+                                                <h5 className="card-text">Total Recipies</h5>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="card mt-2">
-                                    <div className="card-body flex-row">
-                                        <div>
-                                            <img src={icon1} alt="" style={{ 'height': '100px', 'width': '100px' }} />
+                                <div className="card mb-3 col-sm-5" style={{'width':'50vw'}}>
+                                    <div className="row g-0">
+                                        <div className="col-4 col-md-5">
+                                            <img src={icon1} alt="" className="img-fluid rounded-start mt-4 m-3"/>
                                         </div>
-                                        <div>
-                                            <h2>{totalUsers}</h2>
-                                            <h5 className="card-title">Total Users</h5>
+                                        <div className="col-8 col-md-7">
+                                            <div className="card-body">
+                                                <h1 className="card-title">{totalUsers}</h1>
+                                                <h5 className="card-text">Total Users</h5>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -81,12 +108,12 @@ const AdminPanel = () => {
                     </div>
                 </div>
                 <div className="container mt-3">
-                    <div className="row">
+                    <div className="row controlContainer">
                         <div className="col">
-                            <ManagementBox title="Recipie Management" link={"/recipieManagement"} />
+                            <ManagementBox title="Recipie Management" link={"/recipieManagement"}/>
                         </div>
-                        <div className="col">
-                            <ManagementBox title="User Management" link={"/userManagement"} />
+                        <div className="col mt-2 mb-3">
+                            <ManagementBox title="User Management" link={"/userManagement"}/>
                         </div>
                     </div>
                 </div>
