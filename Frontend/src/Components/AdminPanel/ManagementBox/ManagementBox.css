@@ -14,3 +14,10 @@
     font-size: 16px !important;
     color: white !important;
 }
+
+@media screen and (max-width: 768px) {
+    .mgBody{
+        display: flex !important;
+        flex-direction: column;
+    }
+}

@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'recipie_site',
+        'NAME': 'recipie_site_new',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '127.0.0.1',

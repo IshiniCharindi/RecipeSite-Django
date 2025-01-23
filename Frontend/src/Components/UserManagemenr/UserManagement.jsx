@@ -4,6 +4,7 @@ import './UserManagement.css';
 import axios from "axios";
 import DeleteModal from '../UserManagemenr/Modals/DeleteModal/DeleteModal.jsx';
 import EditModal from '../UserManagemenr/Modals/EditModal/EditModal.jsx';
+import Footer from "../Footer/Footer.jsx";
 
 const UserManagement = () => {
     const [users, setUsers] = useState([]);
@@ -109,8 +110,9 @@ const UserManagement = () => {
                     ))}
                     </tbody>
                 </table>
-            </div>
 
+            </div>
+            <Footer/>
             {showDeleteModal && (
                 <DeleteModal
                     onClose={() => setShowDeleteModal(false)}
