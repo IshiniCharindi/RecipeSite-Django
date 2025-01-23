@@ -11,24 +11,35 @@ import AdminPanel from "./Components/AdminPanel/AdminPanel.jsx";
 import RecipieManagement from "./Components/RecipieManagement/RecipieManagement.jsx";
 import UserManagement from "./Components/UserManagemenr/UserManagement.jsx";
 import AddRecipies from "./Components/AddRecipies/AddRecipies.jsx";
-
+import Login from "./pages/login.jsx"
+import Register from './pages/register.jsx';
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <AdminPanel/>,
+        element: <AdminPanel />,
     },
     {
         path: "/recipieManagement",
-        element: <RecipieManagement/>,
+        element: <RecipieManagement />,
     },
     {
         path: "/userManagement",
-        element: <UserManagement/>,
+        element: <UserManagement />,
     },
     {
+
         path: "/addRecipie",
-        element: <AddRecipies/>,
+        element: <AddRecipies />,
+    }, 
+    {
+        path: "/login",
+        element: <Login />
+    },
+    {
+        path: "/register",
+        element: <Register />
+
     }
 
 
