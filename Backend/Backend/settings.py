@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'userManagement.apps.UsermanagementConfig',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -81,11 +82,11 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'recipie_site',
+        'NAME': 'recipie_site_new',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
-        'PORT': '3308',
+        'PORT': '4306',
     }
 }
 

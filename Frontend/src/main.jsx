@@ -10,6 +10,8 @@ import {
 import AdminPanel from "./Components/AdminPanel/AdminPanel.jsx";
 import RecipieManagement from "./Components/RecipieManagement/RecipieManagement.jsx";
 import UserManagement from "./Components/UserManagemenr/UserManagement.jsx";
+import Login from "./pages/login.jsx"
+import Register from './pages/register.jsx';
 
 
 const router = createBrowserRouter([
@@ -24,6 +26,14 @@ const router = createBrowserRouter([
     {
         path: "/userManagement",
         element: <UserManagement/>,
+    },
+    {
+        path:"/login",
+        element:<Login/>
+    },
+    {
+        path:"/register",
+        element:<Register/>
     }
 
 
