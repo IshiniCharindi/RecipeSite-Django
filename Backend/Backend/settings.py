@@ -84,7 +84,11 @@ DATABASES = {
         'NAME': 'recipie_site',
         'USER': 'root',
         'PASSWORD': '',
+<<<<<<< Updated upstream
         'HOST': '127.0.0.1',
+=======
+        'HOST': 'localhost',
+>>>>>>> Stashed changes
         'PORT': '3308',
     }
 }
