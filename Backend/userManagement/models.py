@@ -31,3 +31,14 @@ class RecipieManagement(models.Model):
 
     def __str__(self):
         return self.title
+
+class Contact(models.Model):
+    fullname = models.CharField(max_length=150, null=False, blank=False)
+    email = models.EmailField(max_length=150, null=False, blank=False)
+    phone_number = models.CharField(max_length=10, null=False, blank=False)
+    message = models.TextField(null=False, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.fullname} - {self.email}"
+

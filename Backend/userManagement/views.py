@@ -6,6 +6,9 @@ from .serializers import RecipieManagementSerializer
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework import status
+from .models import Contact
+from .serializers import ContactSerializer
 
 
 class UserManagementView(viewsets.ModelViewSet):
@@ -39,3 +42,14 @@ class RecipieManagementView(viewsets.ModelViewSet):
             return Response({"message": "Status updated successfully"})
         except Exception as e:
             return Response({"error": str(e)}, status=400)
+        
+class ContactViewSet(viewsets.ModelViewSet):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Thank you for your feedback!"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

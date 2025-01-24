@@ -1,0 +1,29 @@
+/* Add this to your CSS file */
+html {
+    scroll-behavior: smooth;
+  }
+  
+  .about-us {
+    padding-top: 60px; /* Adjust according to your header's height */
+  }
+  
+  #about-us {
+    scroll-margin-top: 60px; /* Offset for fixed headers */
+  }
+
+  .contact-us {
+    padding-top: 60px; /* Adjust according to your header's height */
+  }
+  
+  #contact-us {
+    scroll-margin-top: 60px; /* Offset for fixed headers */
+  }
+
+  .what-we-offer {
+    padding-top: 60px; /* Adjust according to your header's height */
+  }
+  
+  #what-we-offer {
+    scroll-margin-top: 60px; /* Offset for fixed headers */
+  }
+  

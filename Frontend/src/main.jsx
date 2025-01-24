@@ -7,6 +7,64 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
+import Home from "./Components/Home/Home.jsx";
+import UnregViewMore from './Components/Unregistered User View more Page/UnregViewMore.jsx';
+import RegViewMore from './Components/Registered User View More Page/RegViewMore.jsx';
+import FullViewMore from './Components/FullRecipeViewMore/FullRecipeViewMore.jsx';
+import AdminPanel from "./Components/AdminPanel/AdminPanel.jsx";
+import RecipieManagement from "./Components/RecipieManagement/RecipieManagement.jsx";
+import UserManagement from "./Components/UserManagemenr/UserManagement.jsx";
+
+
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <App />,
+        children: [
+        {
+            path: '',
+            element: <Home />,
+        },
+        {
+            path: 'unreg-view-more',
+            element: <UnregViewMore />,
+        },
+        {
+            path: 'reg-view-more',
+            element: <RegViewMore />,
+        },
+        {
+            path: 'full-recipe-view-more',
+            element: <FullViewMore />,
+        },
+        {
+          path: "/admin",
+          element: <AdminPanel/>,
+        },
+        {
+            path: "/recipieManagement",
+            element: <RecipieManagement/>,
+        },
+        {
+            path: "/userManagement",
+            element: <UserManagement/>,
+        },
+        ],
+      },
+
+]);
+
+
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <RouterProvider router={router} />
+    </React.StrictMode>,
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import {
+    createBrowserRouter,
+    RouterProvider,
+} from "react-router-dom";
 import AdminPanel from "./Components/AdminPanel/AdminPanel.jsx";
 import RecipieManagement from "./Components/RecipieManagement/RecipieManagement.jsx";
 import UserManagement from "./Components/UserManagemenr/UserManagement.jsx";
