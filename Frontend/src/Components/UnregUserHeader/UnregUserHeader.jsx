@@ -21,8 +21,8 @@ const Header = () => {
                     </ul>
                 </nav>
                 <div className="auth-buttons">
-                    <a href="#" className="btn1 register-btn1">Register</a>
-                    <a href="#" className="btn1 login-btn1">Login</a>
+                    <a href="/register" className="btn1 register-btn1">Register</a>
+                    <a href="/login" className="btn1 login-btn1">Login</a>
                 </div>
             </div>
         </header>

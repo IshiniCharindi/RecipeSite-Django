@@ -14,6 +14,9 @@ import FullViewMore from './Components/FullRecipeViewMore/FullRecipeViewMore.jsx
 import AdminPanel from "./Components/AdminPanel/AdminPanel.jsx";
 import RecipieManagement from "./Components/RecipieManagement/RecipieManagement.jsx";
 import UserManagement from "./Components/UserManagemenr/UserManagement.jsx";
+import Login from "./pages/login.jsx";
+import Registration from "./pages/Register.jsx";
+import AddRecipies from "./Components/AddRecipies/AddRecipies.jsx";
 
 
 const router = createBrowserRouter([
@@ -49,59 +52,25 @@ const router = createBrowserRouter([
             path: "/userManagement",
             element: <UserManagement/>,
         },
+            {
+               path: "/addRecipies",
+               element:<AddRecipies/>
+            },
+            {
+                path: "/login",
+                element: <Login />
+            },
+            {
+                path: "/register",
+                element: <Registration/>
+
+            }
+
         ],
       },
 
 ]);
 
-
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-        <RouterProvider router={router} />
-    </React.StrictMode>,
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
-import {
-    createBrowserRouter,
-    RouterProvider,
-} from "react-router-dom";
-import AdminPanel from "./Components/AdminPanel/AdminPanel.jsx";
-import RecipieManagement from "./Components/RecipieManagement/RecipieManagement.jsx";
-import UserManagement from "./Components/UserManagemenr/UserManagement.jsx";
-import AddRecipies from "./Components/AddRecipies/AddRecipies.jsx";
-import Login from "./pages/login.jsx"
-import Register from './pages/register.jsx';
-
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <AdminPanel />,
-    },
-    {
-        path: "/recipieManagement",
-        element: <RecipieManagement />,
-    },
-    {
-        path: "/userManagement",
-        element: <UserManagement />,
-    },
-    {
-
-        path: "/addRecipie",
-        element: <AddRecipies />,
-    }, 
-    {
-        path: "/login",
-        element: <Login />
-    },
-    {
-        path: "/register",
-        element: <Register />
-
-    }
-
-
-]);
 
 
 
