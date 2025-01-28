@@ -78,7 +78,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'recipie_site_new',
         'USER': 'root',
-        'PASSWORD': 'sarU2001@',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '3308',
         'OPTIONS': {

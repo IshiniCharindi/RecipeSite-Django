@@ -18,7 +18,7 @@ import Login from "./pages/login.jsx";
 import Registration from "./pages/Register.jsx";
 import AddRecipies from "./Components/AddRecipies/AddRecipies.jsx";
 import UserProfile from './Components/UserProfile/UserProfile.jsx';
-import Login from "./pages/login.jsx"
+
 
 
 
