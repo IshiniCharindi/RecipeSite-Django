@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './UserProfile.css'; 
+import './UserProfile.css';
 
 const UserProfile = () => {
     const [userData, setUserData] = useState({ name: '', email: '' });
@@ -10,11 +10,9 @@ const UserProfile = () => {
 
     // Fetch user data from localStorage when the component mounts
     useEffect(() => {
-        const storedName = localStorage.getItem('user.name');
-        const storedEmail = localStorage.getItem('user.email');
-
-        if (storedName && storedEmail) {
-            setUserData({ name: storedName, email: storedEmail });
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUserData(JSON.parse(storedUser));
         } else {
             console.error('User data not found in localStorage.');
         }
@@ -27,38 +25,41 @@ const UserProfile = () => {
     };
 
     // Handle form submission (Save button)
-    const handleSave = (e) => {
+    const handleSave = async (e) => {
         e.preventDefault();
-        // Submit updated user details to the backend
-        axios.put('http://127.0.0.1:8000/api/auth/update/', userData)
-            .then(response => {
-                alert('Profile updated successfully');
-                // Update the localStorage values
-                localStorage.setItem('user.name', userData.name);
-                localStorage.setItem('user.email', userData.email);
-            })
-            .catch(error => {
-                console.error('Error updating profile', error);
-            });
+        try {
+            const response = await axios.put('http://127.0.0.1:8000/api/updates/', userData);
+            alert('Profile updated successfully');
+            localStorage.setItem('user', JSON.stringify(userData)); // Save updated user data to localStorage
+        } catch (error) {
+            console.error('Error updating profile', error);
+            setError('Failed to update profile. Please try again.');
+        }
     };
 
     // Handle password change submission
-    const handleChangePassword = (e) => {
+    const handleChangePassword = async (e) => {
         e.preventDefault();
         const data = {
-            ...userData,  // Include the user's current email and name
+            email: userData.email, // Include the email from userData
             old_password: passwordData.old_password,
             new_password: passwordData.new_password
         };
-        // Call the API to change the password
-        axios.put('http://127.0.0.1:8000/api/auth/update/', data)
-            .then(response => {
-                alert('Password changed successfully');
-                setShowPasswordModal(false); // Close modal on success
-            })
-            .catch(error => {
-                setError('Failed to change password. Please try again.');
-            });
+        try {
+            console.log(data)
+            await axios.put('http://127.0.0.1:8000/api/updates/', data);
+            alert('Password changed successfully');
+            setShowPasswordModal(false); // Close modal on success
+            setPasswordData({ old_password: '', new_password: '' }); // Reset password fields
+        } catch (error) {
+            setError('Failed to change password. Please try again.');
+        }
+    };
+
+    // Handle sign-out
+    const handleSignOut = () => {
+        localStorage.clear();
+        window.location.href = '/login'; // Redirect to login page
     };
 
     return (
@@ -67,7 +68,7 @@ const UserProfile = () => {
                 <h1>{userData.name}</h1>
                 <div className="profile-about-me">
                     <div className="profile-pic">
-                        <img src="src/assets/icon1.png" alt="Profile Pic" />
+                        <img src="/assets/icon1.png" alt="Profile Pic" />
                     </div>
                     <h3>About Me</h3>
                     <p>As a personal trainer, I need an easy-to-use app where I can see my schedule, manage my appointments, and add new members.</p>
@@ -77,53 +78,62 @@ const UserProfile = () => {
             <div className="profile-user-details">
                 <form className="profile-form" onSubmit={handleSave}>
                     <label htmlFor="username">User Name:</label>
-                    <input 
-                        type="text" 
-                        id="username" 
-                        name="name" 
-                        value={userData.name} 
-                        onChange={handleInputChange} 
+                    <input
+                        type="text"
+                        id="username"
+                        name="name"
+                        value={userData.name}
+                        onChange={handleInputChange}
                     />
 
                     <label htmlFor="email">Email Address:</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        value={userData.email} 
-                        onChange={handleInputChange} 
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={userData.email}
+                        onChange={handleInputChange}
                     />
 
-                    <button type="button" className="change-password" onClick={() => setShowPasswordModal(true)}>Change Password</button>
+                    <button
+                        type="button"
+                        className="change-password"
+                        onClick={() => setShowPasswordModal(true)}
+                    >
+                        Change Password
+                    </button>
 
                     <div className="buttons">
                         <button type="submit" className="save">Save</button>
-                        <button type="button" className="signout">Sign Out</button>
+                        <button type="button" className="signout" onClick={handleSignOut}>Sign Out</button>
                     </div>
                 </form>
             </div>
 
             {showPasswordModal && (
-                <div className="modal">
+                <div className="modal" role="dialog" aria-labelledby="change-password-title">
                     <div className="modal-overlay">
                         <div className="modal-content">
+                            <h2 id="change-password-title">Change Password</h2>
                             <form onSubmit={handleChangePassword}>
                                 <label htmlFor="old_password">Old Password</label>
-                                <input 
-                                    type="password" 
-                                    id="old_password" 
+                                <input
+                                    type="password"
+                                    id="old_password"
                                     value={passwordData.old_password}
-                                    onChange={e => setPasswordData({ ...passwordData, old_password: e.target.value })} 
-                                    required 
+                                    onChange={e => setPasswordData({ ...passwordData, old_password: e.target.value })}
+                                    required
+                                    name="password"
                                 />
 
                                 <label htmlFor="new_password">New Password</label>
-                                <input 
-                                    type="password" 
-                                    id="new_password" 
+                                <input
+                                    type="password"
+                                    id="new_password"
                                     value={passwordData.new_password}
-                                    onChange={e => setPasswordData({ ...passwordData, new_password: e.target.value })} 
-                                    required 
+                                    onChange={e => setPasswordData({ ...passwordData, new_password: e.target.value })}
+                                    required
+                                    name="newPassword"
                                 />
 
                                 <div className="modal-buttons">

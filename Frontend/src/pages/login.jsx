@@ -25,7 +25,7 @@ function Login() {
         setError('');
 
         try {
-            const response = await axios.post("http://127.0.0.1:8000/api/auth/login/", formData);
+            const response = await axios.post("http://127.0.0.1:8000/api/login/", formData);
             if (response.status === 200) {
 
                 const user = response.data.user;
@@ -40,7 +40,7 @@ function Login() {
     };
 
     return (
-        <>
+        <div className="login">
             <Header />
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -64,7 +64,9 @@ function Login() {
                                     autoComplete="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:outline-indigo-600 sm:text-sm"
+                                    className="block w-full rounded-md bg-transparent px-3 py-1.5 text-base text-black
+                                     outline outline-1 outline-offset-1 outline-gray-300 placeholder:text-gray-400
+                                     focus:outline focus:outline-2 focus:outline-indigo-600 sm:text-sm"
                                 />
                             </div>
                         </div>
@@ -119,7 +121,7 @@ function Login() {
                 </div>
             </div>
             <Footer />
-        </>
+        </div>
     );
 }
 

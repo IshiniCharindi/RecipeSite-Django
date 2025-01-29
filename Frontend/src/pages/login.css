@@ -1,0 +1,6 @@
+.login input, .login input:focus,.login input:focus {
+    z-index: 10000 !important;
+    background-color: transparent !important;
+    color: black!important;
+}
+

@@ -29,7 +29,7 @@ export default function Registration() {
         const { Cpassword, ...dataToSend } = formData;
 
         try {
-            const response = await axios.post("http://127.0.0.1:8000/api/auth/register/", dataToSend);
+            const response = await axios.post("http://127.0.0.1:8000/api/register/", dataToSend);
             if (response.status === 201) {
                 navigate('/login');
             } else {
