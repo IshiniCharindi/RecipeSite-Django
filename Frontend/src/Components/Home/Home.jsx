@@ -34,7 +34,13 @@ const Home = () => {
   };
 
   const handleViewMoreClick = () => {
-    navigate('/unreg-view-more');
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (!storedUser){
+      navigate('/unreg-view-more');
+    }else{
+      navigate('/reg-view-more');
+    }
+
   }; 
   
   const handleSubmit = async (event) => {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './UserProfile.css';
+import RegUserHeader from "../RegUserHeader/RegUserHeader.jsx";
+import Footer from "../Footer/Footer.jsx";
 
 const UserProfile = () => {
     const [userData, setUserData] = useState({ name: '', email: '' });
@@ -63,91 +65,97 @@ const UserProfile = () => {
     };
 
     return (
-        <div className="profile-container">
-            <div className="profile-section">
-                <h1>{userData.name}</h1>
-                <div className="profile-about-me">
-                    <div className="profile-pic">
-                        <img src="/assets/icon1.png" alt="Profile Pic" />
+        <div>
+            <RegUserHeader />
+            <div className="profile-container">
+
+                <div className="profile-section">
+                    <h1>{userData.name}</h1>
+                    <div className="profile-about-me">
+                        <div className="profile-pic">
+                            <img src="/assets/icon1.png" alt="Profile Pic" />
+                        </div>
+                        <h3>About Me</h3>
+                        <p>As a personal trainer, I need an easy-to-use app where I can see my schedule, manage my appointments, and add new members.</p>
                     </div>
-                    <h3>About Me</h3>
-                    <p>As a personal trainer, I need an easy-to-use app where I can see my schedule, manage my appointments, and add new members.</p>
                 </div>
-            </div>
 
-            <div className="profile-user-details">
-                <form className="profile-form" onSubmit={handleSave}>
-                    <label htmlFor="username">User Name:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="name"
-                        value={userData.name}
-                        onChange={handleInputChange}
-                    />
+                <div className="profile-user-details">
+                    <form className="profile-form" onSubmit={handleSave}>
+                        <label htmlFor="username">User Name:</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="name"
+                            value={userData.name}
+                            onChange={handleInputChange}
+                        />
 
-                    <label htmlFor="email">Email Address:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={userData.email}
-                        onChange={handleInputChange}
-                    />
+                        <label htmlFor="email">Email Address:</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={userData.email}
+                            onChange={handleInputChange}
+                        />
 
-                    <button
-                        type="button"
-                        className="change-password"
-                        onClick={() => setShowPasswordModal(true)}
-                    >
-                        Change Password
-                    </button>
+                        <button
+                            type="button"
+                            className="change-password"
+                            onClick={() => setShowPasswordModal(true)}
+                        >
+                            Change Password
+                        </button>
 
-                    <div className="buttons">
-                        <button type="submit" className="save">Save</button>
-                        <button type="button" className="signout" onClick={handleSignOut}>Sign Out</button>
-                    </div>
-                </form>
-            </div>
+                        <div className="buttons">
+                            <button type="submit" className="save">Save</button>
+                            <button type="button" className="signout" onClick={handleSignOut}>Sign Out</button>
+                        </div>
+                    </form>
+                </div>
 
-            {showPasswordModal && (
-                <div className="modal" role="dialog" aria-labelledby="change-password-title">
-                    <div className="modal-overlay">
-                        <div className="modal-content">
-                            <h2 id="change-password-title">Change Password</h2>
-                            <form onSubmit={handleChangePassword}>
-                                <label htmlFor="old_password">Old Password</label>
-                                <input
-                                    type="password"
-                                    id="old_password"
-                                    value={passwordData.old_password}
-                                    onChange={e => setPasswordData({ ...passwordData, old_password: e.target.value })}
-                                    required
-                                    name="password"
-                                />
+                {showPasswordModal && (
+                    <div className="modal" role="dialog" aria-labelledby="change-password-title">
+                        <div className="modal-overlay">
+                            <div className="modal-content">
+                                <h2 id="change-password-title">Change Password</h2>
+                                <form onSubmit={handleChangePassword}>
+                                    <label htmlFor="old_password">Old Password</label>
+                                    <input
+                                        type="password"
+                                        id="old_password"
+                                        value={passwordData.old_password}
+                                        onChange={e => setPasswordData({ ...passwordData, old_password: e.target.value })}
+                                        required
+                                        name="password"
+                                    />
 
-                                <label htmlFor="new_password">New Password</label>
-                                <input
-                                    type="password"
-                                    id="new_password"
-                                    value={passwordData.new_password}
-                                    onChange={e => setPasswordData({ ...passwordData, new_password: e.target.value })}
-                                    required
-                                    name="newPassword"
-                                />
+                                    <label htmlFor="new_password">New Password</label>
+                                    <input
+                                        type="password"
+                                        id="new_password"
+                                        value={passwordData.new_password}
+                                        onChange={e => setPasswordData({ ...passwordData, new_password: e.target.value })}
+                                        required
+                                        name="newPassword"
+                                    />
 
-                                <div className="modal-buttons">
-                                    <button type="submit" className="save">Save</button>
-                                    <button type="button" className="cancel" onClick={() => setShowPasswordModal(false)}>Cancel</button>
-                                </div>
+                                    <div className="modal-buttons">
+                                        <button type="submit" className="save">Save</button>
+                                        <button type="button" className="cancel" onClick={() => setShowPasswordModal(false)}>Cancel</button>
+                                    </div>
 
-                                {error && <p className="error-message">{error}</p>}
-                            </form>
+                                    {error && <p className="error-message">{error}</p>}
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
+            <Footer/>
         </div>
+
     );
 };
 

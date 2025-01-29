@@ -29,8 +29,15 @@ function Login() {
             if (response.status === 200) {
 
                 const user = response.data.user;
+                console.log(user);
                 localStorage.setItem("user", JSON.stringify(user));
-                navigate('/');
+                const loggedUser = JSON.parse(localStorage.getItem("user"));
+                if(loggedUser && loggedUser.email === "admin@gmail.com") {
+                    navigate('/admin')
+                }else{
+                    navigate('/');
+                }
+
             }
         } catch (err) {
             setError('Invalid email or password');
@@ -114,7 +121,7 @@ function Login() {
 
                     <p className="mt-10 text-center text-sm text-gray-500">
                         Not a member?{' '}
-                        <a href="/RecipeSite-Django/Frontend/src/pages/Register" className="font-semibold text-red-700 hover:text-red-800">
+                        <a href="/register" className="font-semibold text-red-700 hover:text-red-800">
                             Sign Up
                         </a>
                     </p>

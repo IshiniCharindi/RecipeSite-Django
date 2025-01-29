@@ -14,6 +14,9 @@ from rest_framework import status
 from .models import User
 from .serializers import UserSerializer, loginSerializer, UpdateUserSerializer
 from django.contrib.auth.hashers import make_password
+import logging
+from django.contrib.auth.hashers import check_password, make_password
+logger = logging.getLogger(__name__)
 
 class UserManagementView(viewsets.ModelViewSet):
     queryset = UserManagement.objects.all()
@@ -87,27 +90,28 @@ class loginView(APIView):
 class UpdateUserView(APIView):
     def put(self, request):
         try:
-            user = User.objects.get(email=request.data.get('email'))  # Get the user by email
+            email = request.data.get('email')
+            old_password = request.data.get('old_password')
+            new_password = request.data.get('new_password')
 
-            # Serialize the updated data
-            serializer = UpdateUserSerializer(user, data=request.data, partial=True)  # Partial to allow partial updates
+            if not email or not old_password or not new_password:
+                return Response({'error': 'Email, old password, and new password are required.'},
+                                status=status.HTTP_400_BAD_REQUEST)
 
-            if serializer.is_valid():
-                # If password is provided, hash it and update
-                if 'old_password' in request.data and 'new_password' in request.data:
-                    old_password = request.data['old_password']
+            user = User.objects.get(email=email)  # Get user by email
 
-                    # Verify old password before allowing change
-                    if not user.check_password(old_password):
-                        return Response({'error': 'Old password is incorrect.'}, status=status.HTTP_400_BAD_REQUEST)
+            # Verify old password manually
+            if not check_password(old_password, user.password):
+                return Response({'error': 'Old password is incorrect.'}, status=status.HTTP_400_BAD_REQUEST)
 
-                    # Hash the new password
-                    serializer.validated_data['password'] = make_password(request.data['new_password'])
+            # Hash and update new password
+            user.password = make_password(new_password)
+            user.save()
 
-                # Save the updated user data
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response({'message': 'Password updated successfully.'}, status=status.HTTP_200_OK)
 
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except User.DoesNotExist:
             return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        except Exception as e:
+            return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

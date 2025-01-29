@@ -1,47 +1,25 @@
 import React from 'react';
 import './Header.css'
 import logo from '../../assets/logojpg.jpg'
+import userProfileImage from "../../assets/userProfile.png";
 
 const Header = () => {
     return (
-        <div className="navigationBar">
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
-                <div className="container-fluid">
-                    <a className="navbar-brand" href="#"><img src={logo} alt="logo"/></a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarScroll">
-                        <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{'--bs-scroll-height':' 100px'}}>
-                            <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Link</a>
-                            </li>
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Link
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item" href="#">Action</a></li>
-                                    <li><a className="dropdown-item" href="#">Another action</a></li>
-                                    <li><hr className="dropdown-divider"/></li>
-                                    <li><a className="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link disabled" aria-disabled="true">Link</a>
-                            </li>
-                        </ul>
-                        <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                                <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
+        <header className="navigationBar">
+            <div className="container">
+                <div className="logo">
+                    <a href="#"><img src={logo} alt="logo" /></a>
                 </div>
-            </nav>
-        </div>
+                <button className="menu-toggle" aria-label="Toggle navigation">
+                    <span className="menu-icon"></span>
+                </button>
+                <nav className="nav-menu">
+                    <ul className="nav-links">
+                        <li className="nav-item"><a href="/" className="nav-link1 active">Home</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
     );
 };
 

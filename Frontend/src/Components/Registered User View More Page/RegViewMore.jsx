@@ -75,7 +75,7 @@ const RegViewMore = () => {
       <div className="unreg-viewmore">
         <div className="search-container">
           <input type="text" className="search-bar" placeholder="Search recipe here" />
-          <button className="add-recipe-button">+ Add Recipe</button>
+          <a href="/addRecipies"> <button className="add-recipe-button">+ Add Recipe</button></a>
         </div>
         <div className="recipe-grid">
           {recipes.map((recipe, index) => (

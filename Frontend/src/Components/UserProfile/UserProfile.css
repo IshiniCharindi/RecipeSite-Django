@@ -9,11 +9,12 @@
   } 
   
   .profile-container {
+
     display: flex;
     justify-content: space-between;
     padding: 100px;
     max-width:1000px;
-    margin: 0 auto;
+    margin: 5rem auto;
     border: 3px solid #804000;
     border-radius: 15px;
     background-color: #ffffff;

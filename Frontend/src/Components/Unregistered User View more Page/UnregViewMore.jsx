@@ -91,9 +91,9 @@ const UnregViewMore = () => {
       <div className="unreg-viewmore">
         <div className="search-container">
           <input type="text" className="search-bar" placeholder="Search recipe here" />
-          <button className="add-recipe-button" onClick={handleAddRecipe}>
-            + Add Recipe
-          </button>
+          {/*<button className="add-recipe-button" onClick={handleAddRecipe}>*/}
+          {/*  + Add Recipe*/}
+          {/*</button>*/}
         </div>
         <div className="recipe-grid">
           {recipes.map((recipe, index) => (
