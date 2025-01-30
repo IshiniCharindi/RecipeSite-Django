@@ -18,6 +18,7 @@ import Login from "./pages/login.jsx";
 import Registration from "./pages/Register.jsx";
 import AddRecipies from "./Components/AddRecipies/AddRecipies.jsx";
 import UserProfile from './Components/UserProfile/UserProfile.jsx';
+import FullRecipeViewMore from "./Components/FullRecipeViewMore/FullRecipeViewMore.jsx";
 
 
 
@@ -68,13 +69,15 @@ const router = createBrowserRouter([
                 element: <Registration/>
        
     },
-   
-    
 
     {
         path: "/userProfile",
         element: <UserProfile/>,
     },
+            {
+                path:"/full-recipe/:recipeId",
+                element:<FullRecipeViewMore />,
+            },
         ],
       },
 
