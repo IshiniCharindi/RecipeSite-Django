@@ -7,6 +7,7 @@ import intro from '../../assets/adminPanelIntro.jpg';
 import icon1 from '../../assets/icon1.png';
 import icon2 from '../../assets/icon2.png';
 import Footer from "../Footer/Footer.jsx";
+import RegUserHeader from "../RegUserHeader/RegUserHeader.jsx";
 
 const AdminPanel = () => {
     const [totalUsers, setTotalUsers] = useState(0);
@@ -24,7 +25,7 @@ const AdminPanel = () => {
 
     const getTotalRecipes = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/recipies/total_count_recipies/');
+            const response = await axios.get('http://localhost:8000/api/recipes/total_count_recipies/');
             console.log(response.data);
             setTotalRecipies(response.data['total recipies']);
         } catch (error) {
@@ -39,7 +40,7 @@ const AdminPanel = () => {
 
     return (
         <>
-            <Header/>
+            <RegUserHeader/>
             <div className="ManagementContainer">
                 <div className="ManagementTopContainer">
                     <div className="container mt-4">

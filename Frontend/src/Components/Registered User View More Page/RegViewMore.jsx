@@ -11,7 +11,7 @@ const RegViewMore = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/recipies/')
+        axios.get('http://127.0.0.1:8000/api/recipes/')
             .then(response => {
                 setRecipes(response.data);
             })

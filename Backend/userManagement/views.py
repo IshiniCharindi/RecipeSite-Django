@@ -49,7 +49,8 @@ class RecipieManagementView(viewsets.ModelViewSet):
             return Response({"message": "Status updated successfully"})
         except Exception as e:
             return Response({"error": str(e)}, status=400)
-        
+
+
 class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer

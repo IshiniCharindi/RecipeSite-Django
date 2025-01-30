@@ -6,11 +6,11 @@ import Footer from '../Footer/Footer.jsx';
 import './FullRecipeViewMore.css';
 
 const FullRecipeViewMore = () => {
-  const { recipeId } = useParams(); 
+  const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:8000/api/recipies/${recipeId}/`)
+    axios.get(`http://127.0.0.1:8000/api/recipes/${recipeId}/`)
         .then(response => {
           setRecipe(response.data);
         })

@@ -1,6 +1,7 @@
 .ManagementContainer{
     background-color: #F9F3EF;
-    margin-top: -1rem;
+    margin-top: 15rem;
+    margin-bottom: 10rem;
 }
 .ManagementTopContainer {
     display: flex;
