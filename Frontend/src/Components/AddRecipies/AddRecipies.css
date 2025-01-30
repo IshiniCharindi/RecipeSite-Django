@@ -1,36 +1,38 @@
 .mainContainer{
-    background-color: rgba(238, 234, 234, 0.95);
+    background-color: rgba(238, 234, 234, 0.95)!important;
 }
 
 .addRecipieContainer{
-    background-color: #ffffff;
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff !important;
+    margin-bottom: 60rem !important;
+    /*margin-top: 25rem;*/
 }
 
 .addRecipieContainer h1{
-    text-align: center;
-    color: black;
+    text-align: center !important;
+    color: black !important;
 }
 
 .buttonContainer button {
-    font-size: 18px !important;
-    color: black;
+    font-size: 16px !important;
+    color: black !important;
 }
 
 .addRecipieContainer label{
-     color: black;
-     font-size: large;
+     color: black !important;
+     font-size: large !important;
  }
 input[type=text]{
-    border: 2px solid  #8F4738;
-    border-radius: 8px;
+    border: 2px solid  #8F4738 !important;
+    border-radius: 8px !important;
 }
 input[type=file]{
-    border:  2px solid  #8F4738;
-    border-radius: 15px;
+    border:  2px solid  #8F4738 !important;
+    border-radius: 15px !important;
 }
 textarea{
     border:  2px solid  #8F4738 !important;
-    border-radius: 8px;
+    border-radius: 8px !important;
 }

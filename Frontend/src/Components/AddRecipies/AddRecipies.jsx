@@ -3,6 +3,7 @@ import axios from 'axios';
 import Header from "../Header/Header.jsx";
 import './AddRecipies.css';
 import Footer from "../Footer/Footer.jsx";
+import RegUserHeader from "../RegUserHeader/RegUserHeader.jsx";
 
 const AddRecipies = () => {
     const [formData, setFormData] = useState({
@@ -37,7 +38,7 @@ const AddRecipies = () => {
         }
 
         try {
-            const response = await axios.post("http://127.0.0.1:8000/api/recipies/", formDataToSend, {
+            const response = await axios.post('http://127.0.0.1:8000/api/recipies/', formDataToSend, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -50,7 +51,7 @@ const AddRecipies = () => {
     };
     return (
         <div className="mainContainer">
-            <Header />
+            <RegUserHeader />
             <div className="container addRecipieContainer">
                 <h1 className="p-5">Add Recipie</h1>
                 <form className="addRecipieForm p-4" onSubmit={handleSubmit}>
@@ -58,7 +59,7 @@ const AddRecipies = () => {
                         <label htmlFor="title" className="col-sm-2 col-form-label">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-calendar-fill" viewBox="0 0 16 16">
                                 <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5"/>
-                            </svg> &nbsp;
+                            </svg>
                             Title
                         </label>
                         <div className="col-sm-10">
@@ -120,7 +121,7 @@ const AddRecipies = () => {
                         </div>
                     </div>
                     {/*value={formData.description} onChange={handleChange}*/}
-                    <div className="d-grid gap-2 d-md-block text-end pt-4 pb-4 buttonContainer">
+                    <div className="d-grid gap-5 d-md-block text-end pt-4 pb-4 buttonContainer">
                         <button className="btn btn-success " type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
