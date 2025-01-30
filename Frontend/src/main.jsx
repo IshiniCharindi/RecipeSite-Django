@@ -14,7 +14,8 @@ import FullViewMore from './Components/FullRecipeViewMore/FullRecipeViewMore.jsx
 import AdminPanel from "./Components/AdminPanel/AdminPanel.jsx";
 import RecipieManagement from "./Components/RecipieManagement/RecipieManagement.jsx";
 import UserManagement from "./Components/UserManagemenr/UserManagement.jsx";
-
+import AddReview from './Components/AddReview/AddReview.jsx';
+import AddRecipies from './Components/AddRecipies/AddRecipies.jsx';
 
 const router = createBrowserRouter([
     {
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
             element: <RegViewMore />,
         },
         {
-            path: 'full-recipe-view-more',
+            path: 'full-recipe-view-more/:id',
             element: <FullViewMore />,
         },
         {
@@ -48,6 +49,14 @@ const router = createBrowserRouter([
         {
             path: "/userManagement",
             element: <UserManagement/>,
+        },
+        {
+            path: '/add-review',
+            element: <AddReview />,
+        },
+        {
+            path: '/add-recipe',
+            element: <AddRecipies />,
         },
         ],
       },

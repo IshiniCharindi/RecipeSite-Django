@@ -24,13 +24,14 @@ const Home = () => {
   const sliderSettings = {
     dots: true,
     infinite: true,
-    speed: 700,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 2500,
     arrows: false,
     pauseOnHover: false,
+    fade: true,
   };
 
   const handleViewMoreClick = () => {

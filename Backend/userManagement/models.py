@@ -17,7 +17,6 @@ class RecipieManagement(models.Model):
     ]
 
     image1 = models.ImageField(upload_to='uploads/images', null=False, blank=False)
-    image2 = models.ImageField(upload_to='uploads/images', null=False, blank=False)
     title = models.CharField(max_length=250, null=False, blank=False)
     ingredients = models.TextField(null=False, blank=False)
     steps = models.TextField(null=False, blank=False)
@@ -30,7 +29,8 @@ class RecipieManagement(models.Model):
 
 
     def __str__(self):
-        return self.title
+        return f"{self.title} - Status: {self.get_status_display()}"
+
 
 class Contact(models.Model):
     fullname = models.CharField(max_length=150, null=False, blank=False)
@@ -42,3 +42,12 @@ class Contact(models.Model):
     def __str__(self):
         return f"{self.fullname} - {self.email}"
 
+class Review(models.Model):
+    recipe = models.ForeignKey(RecipieManagement, related_name='reviews', on_delete=models.CASCADE)
+    name = models.CharField(max_length=150, null=False, blank=False)
+    rating = models.PositiveSmallIntegerField(default=0)
+    review_text = models.TextField(null=False, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.rating} stars"

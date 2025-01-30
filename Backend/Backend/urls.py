@@ -6,11 +6,13 @@ from rest_framework.routers import DefaultRouter
 from userManagement.views import UserManagementView, RecipieManagementView
 from userManagement.views import ContactViewSet
 from userManagement.views import UserManagementView,RecipieManagementView
+from userManagement.views import ReviewViewSet
 
 router = DefaultRouter()
 router.register("users",UserManagementView,basename="userManagement")
 router.register("recipies",RecipieManagementView,basename="recipieManagement")
 router.register("contact", ContactViewSet, basename="contact")
+router.register("reviews", ReviewViewSet, basename="reviewManagement")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
