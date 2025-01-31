@@ -13,7 +13,6 @@ const RegViewMore = () => {
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/recipes/')
             .then(response => {
-                
                 const activeRecipes = response.data.filter(recipe => recipe.status === 'A');
                 setRecipes(activeRecipes);
             })
@@ -22,8 +21,8 @@ const RegViewMore = () => {
             });
     }, []);
 
-    const handleViewMore = (recipeId) => {
-        navigate(`/full-recipe/${recipeId}`);
+    const handleViewMore = (id) => {
+        navigate(`/full-recipe/${id}`);
     };
 
     return (

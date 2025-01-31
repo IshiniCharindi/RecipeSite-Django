@@ -9,9 +9,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Contact
 from .serializers import ContactSerializer
+from .serializers import ReviewSerializer
 from rest_framework.views import APIView
 from rest_framework import status
 from .models import User
+from .models import Review
 from .serializers import UserSerializer, loginSerializer, UpdateUserSerializer
 from django.contrib.auth.hashers import make_password
 import logging
@@ -30,6 +32,16 @@ class UserManagementView(viewsets.ModelViewSet):
 class RecipieManagementView(viewsets.ModelViewSet):
     queryset = RecipieManagement.objects.all()
     serializer_class = RecipieManagementSerializer
+
+    def get_queryset(self):
+        return RecipieManagement.objects.filter(status='A')
+
+    def retrieve(self, request, pk=None):
+        recipe = get_object_or_404(RecipieManagement, pk=pk)
+        serializer = self.get_serializer(recipe)
+        reviews = recipe.reviews.all().order_by("-created_at")
+        reviews_serializer = ReviewSerializer(reviews, many=True)
+        return Response({**serializer.data, 'reviews': reviews_serializer.data})
 
     @action(detail=False , methods=['GET'])
     def total_count_recipies(self,request):
@@ -116,3 +128,15 @@ class UpdateUserView(APIView):
 
         except Exception as e:
             return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all().order_by('-created_at')
+    serializer_class = ReviewSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Review added successfully!"}, status=status.HTTP_201_CREATED)
+        return Response({"error": "Validation failed", "details": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)

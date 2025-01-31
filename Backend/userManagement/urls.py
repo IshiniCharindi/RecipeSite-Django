@@ -1,10 +1,12 @@
 from rest_framework.routers import DefaultRouter
 from .views import UserManagementView, RecipieManagementView, ContactViewSet, RegisterView, loginView, UpdateUserView
+from .views import ReviewViewSet
 from django.urls import path, include
 
 router = DefaultRouter()
 
 router.register(r'recipes', RecipieManagementView, basename='recipe')
+router.register("reviews", ReviewViewSet, basename="reviewManagement")
 
 urlpatterns = [
     path('users/', UserManagementView.as_view({'get': 'list', 'post': 'create'}), name="userManagement"),
