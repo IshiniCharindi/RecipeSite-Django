@@ -13,7 +13,9 @@ const RegViewMore = () => {
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/recipes/')
             .then(response => {
-                setRecipes(response.data);
+                
+                const activeRecipes = response.data.filter(recipe => recipe.status === 'A');
+                setRecipes(activeRecipes);
             })
             .catch(error => {
                 console.error('Error fetching recipes:', error);
@@ -33,19 +35,23 @@ const RegViewMore = () => {
                     <a href="/addRecipies"> <button className="add-recipe-button">+ Add Recipe</button></a>
                 </div>
                 <div className="recipe-grid">
-                    {recipes.map((recipe) => (
-                        <div className="recipe-card" key={recipe.id}>
-                            <img src={recipe.image1} alt={recipe.title} className="recipe-image" />
-                            <div className="recipe-info">
-                                <h3>
-                                    <img src={foodSymbol} alt="Food Symbol" className="food-symbol" />
-                                    {recipe.title}
-                                </h3>
-                                <p><i>**{recipe.description}**</i></p>
-                                <button className="view-more-button" onClick={() => handleViewMore(recipe.id)}>VIEW MORE</button>
+                    {recipes.length > 0 ? (
+                        recipes.map((recipe) => (
+                            <div className="recipe-card" key={recipe.id}>
+                                <img src={recipe.image1} alt={recipe.title} className="recipe-image" />
+                                <div className="recipe-info">
+                                    <h3>
+                                        <img src={foodSymbol} alt="Food Symbol" className="food-symbol" />
+                                        {recipe.title}
+                                    </h3>
+                                    <p><i>**{recipe.description}**</i></p>
+                                    <button className="view-more-button" onClick={() => handleViewMore(recipe.id)}>VIEW MORE</button>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))
+                    ) : (
+                        <p className="no-recipes-message">No active recipes available.</p>
+                    )}
                 </div>
             </div>
             <Footer />

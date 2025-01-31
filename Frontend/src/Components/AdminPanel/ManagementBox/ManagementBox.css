@@ -5,6 +5,9 @@
     justify-content: center;
     height: 25vh;
 }
+.mCardBody{
+    width: 41vw;
+}
 .card-title{
     font-family: "Font Awesome 6 Pro", "Font Awesome 6 Free";
 }

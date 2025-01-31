@@ -15,7 +15,7 @@ const AdminPanel = () => {
 
     const getTotalUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/users/total_count_users/');
+            const response = await axios.get('http://127.0.0.1:8000/api/users/total_count_users/');
             console.log(response.data);
             setTotalUsers(response.data['total users']);
         } catch (error) {
@@ -43,7 +43,7 @@ const AdminPanel = () => {
             <RegUserHeader/>
             <div className="ManagementContainer">
                 <div className="ManagementTopContainer">
-                    <div className="container mt-4">
+                    <div className="container ">
                         <div className="row">
                             <div className="col-lg-9 col-md-9 col-sm-12 ">
                                 <div className="card mb-3" style={{'height': '52vh'}}>
@@ -59,7 +59,7 @@ const AdminPanel = () => {
                                         </div>
                                         <div className="col-7 col-lg-7 col-md-7 col-sm-12">
                                             <img src={intro} className="card-img-top img-fluid rounded-start" alt="..."
-                                                 style={{'height': '50vh'}}/>
+                                                 style={{'height': '45vh'}}/>
                                         </div>
 
                                     </div>
@@ -78,26 +78,26 @@ const AdminPanel = () => {
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-3 col-sm-12 totalContainer">
-                                <div className="card mb-3 col-sm-5" style={{'width':'50vw'}}>
+                                <div className="card mb-2 col-sm-5" style={{'width':'50vw','height':'25vh'}}>
                                     <div className="row g-0">
                                         <div className="col-4 col-md-5">
                                             <img src={icon2} alt="" className="img-fluid rounded-start mt-4 m-3"/>
                                         </div>
-                                        <div className="col-8 col-md-7">
-                                            <div className="card-body">
+                                        <div className="col-8  col-md-7">
+                                            <div className="card-body mt-n3 mb-3">
                                                 <h1 className="card-title">{totalRecipies}</h1>
                                                 <h5 className="card-text">Total Recipies</h5>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="card mb-3 col-sm-5" style={{'width':'50vw'}}>
+                                <div className="card mb-3 col-sm-5" style={{'width':'50vw','height':'25vh'}}>
                                     <div className="row g-0">
                                         <div className="col-4 col-md-5">
                                             <img src={icon1} alt="" className="img-fluid rounded-start mt-4 m-3"/>
                                         </div>
                                         <div className="col-8 col-md-7">
-                                            <div className="card-body">
+                                            <div className="card-body mt-n3 mb-3">
                                                 <h1 className="card-title">{totalUsers}</h1>
                                                 <h5 className="card-text">Total Users</h5>
                                             </div>

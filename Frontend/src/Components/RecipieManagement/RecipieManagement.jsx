@@ -9,13 +9,13 @@ const RecipieManagement = () => {
     const [selectedRecipe, setSelectedRecipe] = useState(null);
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/recipies/')
+        axios.get('http://127.0.0.1:8000/api/recipes/')
             .then(response => setRecipes(response.data))
             .catch(error => console.error('Error fetching recipes:', error));
     }, []);
 
     const updateStatus = (recipeId, status) => {
-        axios.post(`http://127.0.0.1:8000/api/recipies/${recipeId}/update_status/`, { status })
+        axios.post(`http://127.0.0.1:8000/api/recipes/${recipeId}/update_status/`, { status })
             .then(response => {
                 alert(response.data.message);
                 setRecipes(prev => prev.map(recipe => recipe.id === recipeId ? { ...recipe, status } : recipe));

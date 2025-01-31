@@ -4,6 +4,7 @@ import axios from 'axios';
 import FullViewMoreHeader from '../FullViewMoreHeader/FullViewMoreHeader.jsx';
 import Footer from '../Footer/Footer.jsx';
 import './FullRecipeViewMore.css';
+import RegUserHeader from "../RegUserHeader/RegUserHeader.jsx";
 
 const FullRecipeViewMore = () => {
   const { recipeId } = useParams();
@@ -25,7 +26,7 @@ const FullRecipeViewMore = () => {
 
   return (
       <>
-        <FullViewMoreHeader />
+        <RegUserHeader />
         <div className="recipe-page">
           <div className="recipe-container">
             <h1 className="recipe-title">{recipe.title}</h1>
