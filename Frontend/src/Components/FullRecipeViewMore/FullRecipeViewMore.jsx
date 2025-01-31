@@ -9,7 +9,7 @@ import RegUserHeader from "../RegUserHeader/RegUserHeader.jsx";
 const FullRecipeViewMore = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState([]); // Ensure it's initialized as an array
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -17,7 +17,7 @@ const FullRecipeViewMore = () => {
   useEffect(() => {
     const fetchRecipeAndReviews = async () => {
       try {
-        console.log(id);
+        console.log("Fetching recipe ID:", id);
         const response = await axios.get(`http://127.0.0.1:8000/api/recipes/${id}/`);
         const recipeData = response.data;
 
@@ -27,8 +27,8 @@ const FullRecipeViewMore = () => {
           steps: recipeData.steps ? recipeData.steps.split("\n") : [],
         });
 
-        // Set reviews separately
-        setReviews(recipeData.reviews);
+
+        setReviews(Array.isArray(recipeData.reviews) ? recipeData.reviews : []);
       } catch (err) {
         setError("Failed to fetch recipe details or reviews.");
         console.error("Error fetching recipe:", err);
@@ -91,15 +91,8 @@ const FullRecipeViewMore = () => {
                 + Add Review
               </button>
 
-
-
               <div className="reviews-container">
-                {/* If loading, show a loading message */}
-                {loading ? (
-                    <p>Loading reviews...</p>
-                ) : error ? (
-                    <p>{error}</p>
-                ) : (
+                {reviews.length > 0 ? (
                     reviews.map((review, index) => (
                         <div key={review.id || index} className="review-card">
                           <div className="review-header">
@@ -112,6 +105,8 @@ const FullRecipeViewMore = () => {
                           <p className="review-text">{review.review_text}</p>
                         </div>
                     ))
+                ) : (
+                    <p>No reviews available.</p>
                 )}
               </div>
             </div>
@@ -124,31 +119,3 @@ const FullRecipeViewMore = () => {
 };
 
 export default FullRecipeViewMore;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
