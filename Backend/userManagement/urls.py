@@ -6,9 +6,10 @@ router = DefaultRouter()
 
 router.register(r'recipes', RecipieManagementView, basename='recipe')
 router.register("reviews", ReviewViewSet, basename="reviewManagement")
+router.register("users", UserManagementView, basename="userManagement")
 
 urlpatterns = [
-    path('users/', UserManagementView.as_view({'get': 'list', 'post': 'create'}), name="userManagement"),
+    # path('users/', UserManagementView.as_view({'get': 'list', 'post': 'create'}), name="userManagement"),
     path('', include(router.urls)),
     path('contact/', ContactViewSet.as_view({'get': 'list', 'post': 'create'}), name="contact"),
     path('register/', RegisterView.as_view(), name='register'),
