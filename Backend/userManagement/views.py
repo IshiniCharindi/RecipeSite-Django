@@ -16,6 +16,8 @@ from .models import User
 from .models import Review
 from .serializers import UserSerializer, loginSerializer, UpdateUserSerializer
 from django.contrib.auth.hashers import make_password
+from django.shortcuts import get_object_or_404
+
 import logging
 from django.contrib.auth.hashers import check_password, make_password
 logger = logging.getLogger(__name__)
@@ -32,9 +34,6 @@ class UserManagementView(viewsets.ModelViewSet):
 class RecipieManagementView(viewsets.ModelViewSet):
     queryset = RecipieManagement.objects.all()
     serializer_class = RecipieManagementSerializer
-
-    def get_queryset(self):
-        return RecipieManagement.objects.filter(status='A')
 
     def retrieve(self, request, pk=None):
         recipe = get_object_or_404(RecipieManagement, pk=pk)

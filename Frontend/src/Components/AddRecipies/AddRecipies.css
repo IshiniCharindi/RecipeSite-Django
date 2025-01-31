@@ -36,3 +36,10 @@ textarea{
     border:  2px solid  #8F4738 !important;
     border-radius: 8px !important;
 }
+
+.buttonContainer .btn-success{
+    width: 20%;
+}
+.buttonContainer .btn-danger{
+    width: 20%;
+}

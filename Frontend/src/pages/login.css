@@ -4,3 +4,76 @@
     color: black!important;
 }
 
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5ebe0;
+    color: #333;
+
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h2 {
+    margin-top: 3rem;
+    color: #8f4738;
+    font-size: 2rem;
+}
+
+input {
+    border: 1px solid #8f4738;
+    background-color: #fff;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+input:focus {
+    border-color: #ffd700;
+    outline: none;
+}
+
+button {
+    background-color: #8f4738;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #6d3629;
+}
+
+button:disabled {
+    background-color: #b07e72;
+    cursor: not-allowed;
+}
+
+.text-red-700 {
+    color: #8f4738;
+}
+
+.text-red-700:hover {
+    color: #ffd700;
+}
+
+.text-gray-900 {
+    color: #4a2c2a;
+}
+
+.footer {
+    margin-top: auto;
+}
+

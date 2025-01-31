@@ -31,7 +31,7 @@
 .slick-dots li button {
   background-color: #fff;
   border-radius: 50%; 
-  width: 12px; 
+  width: 12px!important;
   height: 12px; 
   opacity: 0.6; 
   transition: background-color 0.3s, opacity 0.3s; 
@@ -56,14 +56,15 @@
   top: 33rem; 
   left: 50%;
   transform: translateX(-50%);
-  padding: 10px 20px;
+  padding: 10px 25px;
   background-color: #8f4738; 
   color: white;
   border: none;
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px;
-  z-index: 2; 
+  z-index: 2;
+  width: 20%;
 }
 
 .view-more-btn:hover {
@@ -237,6 +238,7 @@
   top: 50%;
   z-index: 0;
   background-color: #fff;
+  margin-bottom: 5rem;
   
 }
 
@@ -264,7 +266,7 @@
 }
 
 .contact-form button {
-  padding: 10px 30px;
+  padding: 10px 30px !important;
   background-color: #8f4738;
   text-align: center;
   box-sizing: border-box;

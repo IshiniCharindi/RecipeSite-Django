@@ -33,7 +33,8 @@
 .add-recipe-button {
     position: absolute;
     right: 0; 
-    top: 50%; 
+    top: -5%;
+    width: 10%;
     transform: translateY(-50%);
     padding: 10px 20px;
     background-color: #e0e0e0;
@@ -47,6 +48,8 @@
   }
   
 .add-recipe-button:hover {
+    background-color: #e0e0e0;
+    color: #3063C9;
     transform: translateY(-50%) scale(1.1);
 }
   
