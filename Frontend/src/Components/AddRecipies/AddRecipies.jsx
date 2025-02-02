@@ -4,6 +4,7 @@ import Header from "../Header/Header.jsx";
 import './AddRecipies.css';
 import Footer from "../Footer/Footer.jsx";
 import RegUserHeader from "../RegUserHeader/RegUserHeader.jsx";
+import AdminHeader from "../adminHeader/AdminHeader.jsx";
 
 const AddRecipies = () => {
     const [formData, setFormData] = useState({
@@ -44,14 +45,21 @@ const AddRecipies = () => {
                 },
             });
             alert("Recipe added successfully!");
+
+            location.reload();
         } catch (error) {
             console.error("Error adding recipe:", error);
             alert("Failed to add recipe. Please try again.");
+            location.reload();
         }
     };
+
+    const loggedUser = JSON.parse(localStorage.getItem("user"));
+
+
     return (
         <div className="mainContainer">
-            <RegUserHeader />
+            {loggedUser.email === "admin@gmail.com" ? <AdminHeader /> : <RegUserHeader />}
             <div className="container addRecipieContainer">
                 <h1 className="p-5">Add Recipie</h1>
                 <form className="addRecipieForm p-4" onSubmit={handleSubmit}>

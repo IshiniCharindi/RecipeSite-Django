@@ -5,6 +5,7 @@ import RegUserHeader from '../RegUserHeader/RegUserHeader.jsx';
 import Footer from '../Footer/Footer.jsx';
 import foodSymbol from '../../assets/food-symbol.png';
 import './RegViewMore.css';
+import AdminHeader from "../adminHeader/AdminHeader.jsx";
 
 const RegViewMore = () => {
     const [recipes, setRecipes] = useState([]);
@@ -25,9 +26,11 @@ const RegViewMore = () => {
         navigate(`/full-recipe/${id}`);
     };
 
+    const loggedUser = JSON.parse(localStorage.getItem("user"));
+
     return (
         <>
-            <RegUserHeader />
+            {loggedUser.email === "admin@gmail.com" ? <AdminHeader /> : <RegUserHeader />}
             <div className="unreg-viewmore">
                 <div className="search-container">
                     <input type="text" className="search-bar" placeholder="Search recipe here" />

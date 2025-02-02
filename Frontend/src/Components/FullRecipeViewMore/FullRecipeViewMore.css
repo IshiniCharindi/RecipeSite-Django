@@ -31,12 +31,13 @@ body {
 
 .recipe-image {
     margin-top: 20px;
-    width: auto;
-    height: 500px;
+    height: 500px!important;
+    width: 500px !important;
     justify-content: center;
     align-items: center;
     object-fit: cover;
     object-position: center;
+    border-radius: 0 !important;
 }
 
 .recipe-description {

@@ -8,6 +8,7 @@ import icon1 from '../../assets/icon1.png';
 import icon2 from '../../assets/icon2.png';
 import Footer from "../Footer/Footer.jsx";
 import RegUserHeader from "../RegUserHeader/RegUserHeader.jsx";
+import AdminHeader from "../adminHeader/AdminHeader.jsx";
 
 const AdminPanel = () => {
     const [totalUsers, setTotalUsers] = useState(0);
@@ -40,7 +41,7 @@ const AdminPanel = () => {
 
     return (
         <>
-            <RegUserHeader/>
+            <AdminHeader/>
             <div className="ManagementContainer">
                 <div className="ManagementTopContainer">
                     <div className="container ">

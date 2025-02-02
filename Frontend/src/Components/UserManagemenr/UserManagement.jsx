@@ -5,6 +5,7 @@ import axios from "axios";
 import DeleteModal from '../UserManagemenr/Modals/DeleteModal/DeleteModal.jsx';
 import EditModal from '../UserManagemenr/Modals/EditModal/EditModal.jsx';
 import Footer from "../Footer/Footer.jsx";
+import AdminHeader from "../adminHeader/AdminHeader.jsx";
 
 const UserManagement = () => {
     const [users, setUsers] = useState([]);
@@ -15,7 +16,7 @@ const UserManagement = () => {
     // Fetch all users
     const getUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/users');
+            const response = await axios.get('http://127.0.0.1:8000/api/users/');
             setUsers(response.data);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -62,7 +63,7 @@ const UserManagement = () => {
 
     return (
         <div>
-            <Header />
+            <AdminHeader />
             <div className="userTitle">
                 <h1>User Management</h1>
             </div>

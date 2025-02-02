@@ -3,6 +3,7 @@ import Header from "../Header/Header.jsx";
 import './RecipieManagement.css';
 import axios from 'axios';
 import Footer from "../Footer/Footer.jsx";
+import AdminHeader from "../adminHeader/AdminHeader.jsx";
 
 const RecipieManagement = () => {
     const [recipes, setRecipes] = useState([]);
@@ -29,7 +30,7 @@ const RecipieManagement = () => {
 
     return (
         <>
-            <Header />
+            <AdminHeader />
             <div className="recipeTitle">
                 <h1>Recipie Management</h1>
             </div>
@@ -41,7 +42,7 @@ const RecipieManagement = () => {
                     <table className="table align-middle">
                         <thead>
                         <tr>
-                            <th>Username</th>
+                            <th></th>
                             <th>Recipie Title</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -55,12 +56,12 @@ const RecipieManagement = () => {
                                         <img
                                             src={recipe.image1}
                                             alt=""
-                                            className="recipe-image"
+                                            className="recipe-image-admin"
                                         />
-                                        <div className="ms-3">
-                                            <p className="fw-bold">{recipe.title}</p>
-                                            <p className="text-muted">{recipe.description}</p>
-                                        </div>
+                                        {/*<div className="ms-3">*/}
+                                        {/*    <p className="fw-bold">{recipe.title}</p>*/}
+                                        {/*    <p className="text-muted">{recipe.description}</p>*/}
+                                        {/*</div>*/}
                                     </div>
                                 </td>
                                 <td>{recipe.title}</td>
@@ -91,7 +92,7 @@ const RecipieManagement = () => {
                     <table className="table align-middle">
                         <thead>
                         <tr>
-                            <th>Username</th>
+                            <th></th>
                             <th>Recipie Title</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -105,12 +106,12 @@ const RecipieManagement = () => {
                                         <img
                                             src={recipe.image1}
                                             alt=""
-                                            className="recipe-image"
+                                            className="recipe-image-admin"
                                         />
-                                        <div className="ms-3">
-                                            <p className="fw-bold">{recipe.title}</p>
-                                            <p className="text-muted">{recipe.description}</p>
-                                        </div>
+                                        {/*<div className="ms-3">*/}
+                                        {/*    <p className="fw-bold">{recipe.title}</p>*/}
+                                        {/*    <p className="text-muted">{recipe.description}</p>*/}
+                                        {/*</div>*/}
                                     </div>
                                 </td>
                                 <td>{recipe.title}</td>

@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Footer from "../Footer/Footer.jsx";
 import AddReview from "../AddReview/AddReview.jsx";
 import axios from "axios";
 import "./FullRecipeViewMore.css";
 import RegUserHeader from "../RegUserHeader/RegUserHeader.jsx";
-
+import AdminHeader from "../adminHeader/AdminHeader.jsx";
+import UnregUserHeader from "../UnregUserHeader/UnregUserHeader.jsx";
 const FullRecipeViewMore = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
-  const [reviews, setReviews] = useState([]); // Ensure it's initialized as an array
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRecipeAndReviews = async () => {
@@ -27,7 +29,6 @@ const FullRecipeViewMore = () => {
           steps: recipeData.steps ? recipeData.steps.split("\n") : [],
         });
 
-
         setReviews(Array.isArray(recipeData.reviews) ? recipeData.reviews : []);
       } catch (err) {
         setError("Failed to fetch recipe details or reviews.");
@@ -40,8 +41,14 @@ const FullRecipeViewMore = () => {
     fetchRecipeAndReviews();
   }, [id]);
 
-  const togglePopup = () => {
-    setIsPopupOpen(!isPopupOpen);
+  const loggedUser = JSON.parse(localStorage.getItem("user"));
+
+  const handleAddReviewClick = () => {
+    if (loggedUser && loggedUser.email) {
+      setIsPopupOpen(true);
+    } else {
+      navigate("/login"); // Redirect to login page
+    }
   };
 
   if (loading) return <p>Loading recipe details...</p>;
@@ -50,11 +57,17 @@ const FullRecipeViewMore = () => {
 
   return (
       <>
-        <RegUserHeader />
+        {loggedUser ? (
+            loggedUser.email === "admin@gmail.com" ? <AdminHeader /> : <RegUserHeader />
+        ) : (
+            <UnregUserHeader />
+        )}
+
         <div className="recipe-page">
           <div className="recipe-container">
             <h1 className="recipe-title">{recipe.title}</h1>
-            <img src={recipe.image1} alt={recipe.title} className="recipe-image" />
+            <img src={recipe.image1} alt={recipe.title} className="recipe-image" /> &nbsp;&nbsp;
+            <img src={recipe.image2} alt={recipe.title} className="recipe-image" />
             <p className="recipe-description">{recipe.description}</p>
 
             <div className="recipe-sections">
@@ -87,9 +100,15 @@ const FullRecipeViewMore = () => {
 
             <div className="ratings-reviews">
               <h2>Ratings & Reviews</h2>
-              <button className="add-review-button" onClick={togglePopup}>
-                + Add Review
-              </button>
+              {loggedUser && loggedUser.email ? (
+                  <button className="add-review-button" onClick={handleAddReviewClick}>
+                    + Add Review
+                  </button>
+              ) : (
+                  <button className="add-review-button" onClick={handleAddReviewClick}>
+                    + Add Review
+                  </button>
+              )}
 
               <div className="reviews-container">
                 {reviews.length > 0 ? (
@@ -112,8 +131,9 @@ const FullRecipeViewMore = () => {
             </div>
           </div>
         </div>
+
         <Footer />
-        <AddReview isPopupOpen={isPopupOpen} togglePopup={togglePopup} recipeId={id} />
+        <AddReview isPopupOpen={isPopupOpen} togglePopup={() => setIsPopupOpen(false)} recipeId={id} />
       </>
   );
 };

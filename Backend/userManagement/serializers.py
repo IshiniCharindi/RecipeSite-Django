@@ -53,6 +53,10 @@ class UserManagementSerializer(serializers.ModelSerializer):
         model = UserManagement
         fields = '__all__'
 
+def create(self, validated_data):
+    password=validated_data.pop('password')
+    validated_data['password']=make_password(password)
+    return User.objects.create(**validated_data)
 
 class RecipieManagementSerializer(serializers.ModelSerializer):
     class Meta:
