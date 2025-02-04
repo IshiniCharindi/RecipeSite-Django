@@ -161,7 +161,7 @@ const RecipieManagement = () => {
                         </div>
                         <p><strong>Description:</strong> {selectedRecipe.description}</p>
                         <p><strong>Ingredients:</strong> {selectedRecipe.ingredients}</p>
-                        <p><strong>Instructions:</strong> {selectedRecipe.instructions}</p>
+                        <p><strong>Instructions:</strong> {selectedRecipe.steps}</p>
                         <div className="modal-actions">
                             {selectedRecipe.status === 'P' && (
                                 <>
